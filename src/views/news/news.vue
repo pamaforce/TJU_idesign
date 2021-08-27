@@ -2,7 +2,7 @@
   <div class="major-class">
     <div class="nav-class">
       <div class="h-class" @click="changeStatue">
-        <p style="color: #6c6c6c">专业介绍</p>
+        <p style="color: #6c6c6c">新闻动态</p>
         <v-icon
           :class="[statue ? '' : 'rotated']"
           style="position: absolute; right: 0; top: 3.7px"
@@ -14,33 +14,35 @@
         :style="statue ? 'max-height: 400px' : 'max-height: 0'"
       >
         <p
-          :style="$route.name == 'a' ? 'font-weight:600;color:#4e4e4e' : ''"
-          @click="to('a')"
+          :style="
+            $route.name == 'z1' || $route.params.category_id == 26
+              ? 'font-weight:600;color:#4e4e4e'
+              : ''
+          "
+          @click="to('z1')"
         >
-          使命愿景
+          讲座
         </p>
         <p
-          :style="$route.name == 'b' ? 'font-weight:600;color:#4e4e4e' : ''"
-          @click="to('b')"
+          :style="
+            $route.name == 'z2' || $route.params.category_id == 27
+              ? 'font-weight:600;color:#4e4e4e'
+              : ''
+          "
+          @click="to('z2')"
         >
-          发展历程
-        </p>
-        <p
-          :style="$route.name == 'c' ? 'font-weight:600;color:#4e4e4e' : ''"
-          @click="to('c')"
-        >
-          办学条件
+          展览
         </p>
         <div style="position: relative" @click="changeSubStatue">
           <p
             :style="
-              $route.name > 'c' && $route.name < 'g'
+              $route.name > 'z2' && $route.name < 'z7'
                 ? 'font-weight:600;color:#4e4e4e'
                 : ''
             "
             class="h-class subH-class"
           >
-            师资队伍
+            学习
           </p>
           <v-icon
             :class="[subStatue ? '' : 'rotated']"
@@ -53,29 +55,59 @@
           :style="subStatue ? 'max-height: 400px' : 'max-height: 0'"
         >
           <p
-            :style="$route.name == 'd' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('d')"
+            :style="$route.name == 'z3' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z3')"
           >
-            博士生导师
+            课程
           </p>
           <p
-            :style="$route.name == 'e' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('e')"
+            :style="$route.name == 'z4' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z4')"
           >
-            硕士生导师
+            课设
           </p>
           <p
-            :style="$route.name == 'f' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('f')"
+            :style="$route.name == 'z5' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z5')"
           >
-            实验教师
+            毕设
+          </p>
+          <p
+            :style="$route.name == 'z6' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z6')"
+          >
+            工作坊
           </p>
         </div>
         <p
-          :style="$route.name == 'g' ? 'font-weight:600;color:#4e4e4e' : ''"
-          @click="to('g')"
+          :style="
+            $route.name == 'z7' || $route.params.category_id == 29
+              ? 'font-weight:600;color:#4e4e4e'
+              : ''
+          "
+          @click="to('z7')"
         >
-          联系我们
+          会议
+        </p>
+        <p
+          :style="
+            $route.name == 'z8' || $route.params.category_id == 30
+              ? 'font-weight:600;color:#4e4e4e'
+              : ''
+          "
+          @click="to('z8')"
+        >
+          活动
+        </p>
+        <p
+          :style="
+            $route.name == 'z9' || $route.params.category_id == 31
+              ? 'font-weight:600;color:#4e4e4e'
+              : ''
+          "
+          @click="to('z9')"
+        >
+          捷报
         </p>
       </div>
     </div>
@@ -84,7 +116,7 @@
 </template>
 <script>
 export default {
-  name: "majorIntroduction",
+  name: "news",
   data: () => ({
     statue: true,
     subStatue: false,
@@ -102,13 +134,13 @@ export default {
   },
   watch: {
     $route() {
-      if (this.$route.name > "c" && this.$route.name < "g") {
+      if (this.$route.name > "z2" && this.$route.name < "z7") {
         this.subStatue = true;
       }
     },
   },
   created: function () {
-    if (this.$route.name > "c" && this.$route.name < "g") {
+    if (this.$route.name > "z2" && this.$route.name < "z7") {
       this.subStatue = true;
     }
   },

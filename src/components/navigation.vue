@@ -17,7 +17,7 @@
       <div class="gap-class">
         <div class="items-class">
           <div class="col-class">
-            <p class="title-class">专业介绍</p>
+            <p>专业介绍</p>
             <router-link to="/majorIntroduction/mission">使命愿景</router-link>
             <router-link to="/majorIntroduction/development"
               >发展历程</router-link
@@ -25,14 +25,16 @@
             <router-link to="/majorIntroduction/conditions"
               >办学条件</router-link
             >
-            <router-link to="/majorIntroduction/faculty">师资队伍</router-link>
+            <router-link to="/majorIntroduction/doctoralSupervisor"
+              >师资队伍</router-link
+            >
             <router-link to="/majorIntroduction/contactUs"
               >联系我们</router-link
             >
           </div>
           <div class="line-class line-1-class"></div>
           <div class="col-class">
-            <p class="title-class">新闻动态</p>
+            <p>新闻动态</p>
             <router-link to="/news/lecture" style="margin-right: 80px"
               >讲座</router-link
             >
@@ -54,7 +56,7 @@
           </div>
           <div class="line-class line-2-class"></div>
           <div class="col-class">
-            <p class="title-class">人才培养</p>
+            <p>人才培养</p>
             <router-link to="/education/undergraduate">本科生教学</router-link>
             <router-link to="/education/postgraduate">研究生教学</router-link>
             <router-link to="/education/cooperation">校企合作</router-link>
@@ -65,7 +67,7 @@
           </div>
           <div class="line-class line-3-class"></div>
           <div class="col-class">
-            <p class="title-class">国际交流</p>
+            <p>国际交流</p>
             <router-link to="/internationalExchange/EnglishCourse"
               >全英文课程</router-link
             >
@@ -78,8 +80,8 @@
           </div>
           <div class="line-class line-4-class"></div>
           <div class="col-class">
-            <p class="title-class">作品展示</p>
-            <router-link to="/gallery/excellentCurriculumDesign"
+            <p>作品展示</p>
+            <router-link to="/gallery/excellentCurriculumDesign_u"
               >优秀课程设计</router-link
             >
             <router-link to="/gallery/excellentGraduationProject"
@@ -122,7 +124,7 @@ a {
   top: 0;
   width: 100%;
   height: 70px;
-  background-color: rgba(44, 51, 54, 0.9);
+  background-color: rgba(44, 51, 54.99);
   z-index: 99;
 }
 .main-content {
@@ -171,7 +173,7 @@ a {
   top: 17px;
   right: 0px;
   width: 850px;
-  height: 320px;
+  height: 300px;
   background-color: rgba(44, 51, 54, 0.5);
 }
 .col-class {
@@ -184,7 +186,8 @@ a {
   color: #fff;
   font-size: 17px;
   font-weight: 700;
-  margin-top: 30px;
+  margin-top: 25px;
+  margin-bottom: 5px;
 }
 .col-class a {
   color: #fff;
@@ -205,8 +208,8 @@ a {
 }
 .line-class {
   position: absolute;
-  top: 30px;
-  height: 260px;
+  top: 25px;
+  height: 250px;
   width: 1px;
   background-color: #f9f9f9;
 }

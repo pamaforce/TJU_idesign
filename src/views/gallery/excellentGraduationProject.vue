@@ -1,10 +1,14 @@
 <template>
-  <div style="height: 70vh; padding: 250px">
-    <h1>This is a excellentGraduationProject page</h1>
+  <div>
+    <my-breadcrumbs title="优秀毕业设计" />
   </div>
 </template>
 <script>
+import myBreadcrumbs from "../../components/breadcrumbs.vue";
 export default {
   name: "excellentGraduationProject",
+  components: {
+    myBreadcrumbs,
+  },
 };
 </script>

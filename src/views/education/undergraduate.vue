@@ -1,10 +1,14 @@
 <template>
-  <div style="height: 70vh; padding: 250px">
-    <h1>This is a undergraduate page</h1>
+  <div>
+    <my-breadcrumbs title="本科生教学" />
   </div>
 </template>
 <script>
+import myBreadcrumbs from "../../components/breadcrumbs.vue";
 export default {
   name: "undergraduate",
+  components: {
+    myBreadcrumbs,
+  },
 };
 </script>

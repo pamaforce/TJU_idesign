@@ -2,7 +2,7 @@
   <div class="major-class">
     <div class="nav-class">
       <div class="h-class" @click="changeStatue">
-        <p style="color: #6c6c6c">专业介绍</p>
+        <p style="color: #6c6c6c">人才培养</p>
         <v-icon
           :class="[statue ? '' : 'rotated']"
           style="position: absolute; right: 0; top: 3.7px"
@@ -14,33 +14,39 @@
         :style="statue ? 'max-height: 400px' : 'max-height: 0'"
       >
         <p
-          :style="$route.name == 'a' ? 'font-weight:600;color:#4e4e4e' : ''"
-          @click="to('a')"
+          :style="$route.name == 'h' ? 'font-weight:600;color:#4e4e4e' : ''"
+          @click="to('h')"
         >
-          使命愿景
+          本科生教学
         </p>
         <p
-          :style="$route.name == 'b' ? 'font-weight:600;color:#4e4e4e' : ''"
-          @click="to('b')"
+          :style="$route.name == 'i' ? 'font-weight:600;color:#4e4e4e' : ''"
+          @click="to('i')"
         >
-          发展历程
+          研究生教学
         </p>
         <p
-          :style="$route.name == 'c' ? 'font-weight:600;color:#4e4e4e' : ''"
-          @click="to('c')"
+          :style="$route.name == 'j' ? 'font-weight:600;color:#4e4e4e' : ''"
+          @click="to('j')"
         >
-          办学条件
+          校企合作
+        </p>
+        <p
+          :style="$route.name == 'k' ? 'font-weight:600;color:#4e4e4e' : ''"
+          @click="to('k')"
+        >
+          创新创业
         </p>
         <div style="position: relative" @click="changeSubStatue">
           <p
             :style="
-              $route.name > 'c' && $route.name < 'g'
+              this.$route.name > 'k' && this.$route.name < 'o'
                 ? 'font-weight:600;color:#4e4e4e'
                 : ''
             "
             class="h-class subH-class"
           >
-            师资队伍
+            校友风采
           </p>
           <v-icon
             :class="[subStatue ? '' : 'rotated']"
@@ -51,32 +57,7 @@
         <div
           class="h-class subH-item-class"
           :style="subStatue ? 'max-height: 400px' : 'max-height: 0'"
-        >
-          <p
-            :style="$route.name == 'd' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('d')"
-          >
-            博士生导师
-          </p>
-          <p
-            :style="$route.name == 'e' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('e')"
-          >
-            硕士生导师
-          </p>
-          <p
-            :style="$route.name == 'f' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('f')"
-          >
-            实验教师
-          </p>
-        </div>
-        <p
-          :style="$route.name == 'g' ? 'font-weight:600;color:#4e4e4e' : ''"
-          @click="to('g')"
-        >
-          联系我们
-        </p>
+        ></div>
       </div>
     </div>
     <router-view class="router-class" />
@@ -84,7 +65,7 @@
 </template>
 <script>
 export default {
-  name: "majorIntroduction",
+  name: "education",
   data: () => ({
     statue: true,
     subStatue: false,
@@ -102,13 +83,13 @@ export default {
   },
   watch: {
     $route() {
-      if (this.$route.name > "c" && this.$route.name < "g") {
+      if (this.$route.name > "k" && this.$route.name < "o") {
         this.subStatue = true;
       }
     },
   },
   created: function () {
-    if (this.$route.name > "c" && this.$route.name < "g") {
+    if (this.$route.name > "k" && this.$route.name < "o") {
       this.subStatue = true;
     }
   },

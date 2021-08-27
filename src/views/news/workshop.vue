@@ -1,10 +1,14 @@
 <template>
-  <div style="height: 70vh; padding: 250px">
-    <h1>This is a workshop page</h1>
+  <div>
+    <my-breadcrumbs title="学习" subTitle="工作坊" />
   </div>
 </template>
 <script>
+import myBreadcrumbs from "../../components/breadcrumbs.vue";
 export default {
   name: "workshop",
+  components: {
+    myBreadcrumbs,
+  },
 };
 </script>

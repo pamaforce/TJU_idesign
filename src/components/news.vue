@@ -1,13 +1,19 @@
 <template>
   <div class="news-class">
-    <img style="width: 100%; height: 200px; cursor: pointer" :src="data.src" />
-    <div class="info-class">
-      <p>[{{ data.type }}]</p>
-      <p>{{ data.date }}</p>
-    </div>
-    <p class="title-class">
-      {{ data.title }}
-    </p>
+    <template v-if="JSON.stringify(data) != '{}'">
+      <img
+        style="width: 100%; height: 190px; cursor: pointer"
+        @click="toNews"
+        :src="data.src"
+      />
+      <div class="info-class">
+        <p>[{{ data.type }}]</p>
+        <p>{{ data.date }}</p>
+      </div>
+      <p class="title-class" @click="toNews">
+        {{ data.title }}
+      </p>
+    </template>
   </div>
 </template>
 <script>
@@ -16,12 +22,10 @@ export default {
   props: {
     data: Object,
   },
-  data: () => ({}),
   methods: {
-    preDo() {},
-  },
-  mounted: function () {
-    this.preDo();
+    toNews() {
+      this.$router.push("news/" + this.data.category_id + "/" + this.data.id);
+    },
   },
 };
 </script>
@@ -34,20 +38,18 @@ img:hover {
 }
 .title-class {
   color: #4e4e4e;
-  font-size: 19px;
+  font-size: 18px;
   cursor: pointer;
   text-align: justify;
 }
 .news-class {
   display: inline-block;
-  margin-top: 0px;
-  margin: 35.66px;
-  margin-bottom: 10px;
-  width: 320px;
-  height: 290px;
+  margin-top: 25px;
+  width: 338px;
+  height: 280px;
 }
 .info-class {
-  font-size: 17px;
+  font-size: 15px;
   color: #a6a6a6;
   display: flex;
   justify-content: space-between;

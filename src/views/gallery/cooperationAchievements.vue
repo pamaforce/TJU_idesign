@@ -1,10 +1,14 @@
 <template>
-  <div style="height: 70vh; padding: 250px">
-    <h1>This is a cooperationAchievements page</h1>
+  <div>
+    <my-breadcrumbs title="校企合作成果" />
   </div>
 </template>
 <script>
+import myBreadcrumbs from "../../components/breadcrumbs.vue";
 export default {
   name: "cooperationAchievements",
+  components: {
+    myBreadcrumbs,
+  },
 };
 </script>

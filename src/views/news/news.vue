@@ -1,6 +1,6 @@
 <template>
   <div class="major-class">
-    <div class="nav-class">
+    <div class="nav-class noselect">
       <div class="h-class" @click="changeStatue">
         <p style="color: #6c6c6c">新闻动态</p>
         <v-icon
@@ -152,11 +152,11 @@ export default {
   top: 140px;
   left: 360px;
   width: 829px;
+  min-height: 500px;
 }
 .major-class {
   position: relative;
   width: 1264px;
-  min-height: 800px;
   margin: 0 auto;
   margin-bottom: 190px;
 }
@@ -212,5 +212,29 @@ export default {
 .subH-class {
   font-weight: 400;
   font-size: 17px;
+}
+@media screen and (max-width: 1264px) {
+  .router-class {
+    width: calc(100vw - 435px);
+  }
+  .major-class {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .nav-class {
+    display: none;
+  }
+  .major-class {
+    margin-top: 90px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0 15px;
+  }
+  .router-class {
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 }
 </style>

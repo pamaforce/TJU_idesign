@@ -6,11 +6,15 @@ import mission from '../views/majorIntroduction/mission.vue'
 import doctoralSupervisor from '../views/majorIntroduction/doctoralSupervisor.vue'
 import masterSupervisor from '../views/majorIntroduction/masterSupervisor.vue'
 import experimentalTeacher from '../views/majorIntroduction/experimentalTeacher.vue'
+import externalFaculty from '../views/majorIntroduction/externalFaculty.vue'
+import retiredTeacher from '../views/majorIntroduction/retiredTeacher.vue'
 import development from '../views/majorIntroduction/development.vue'
 import contactUs from '../views/majorIntroduction/contactUs.vue'
 import conditions from '../views/majorIntroduction/conditions.vue'
 import news from '../views/news/news.vue'
-import theNews from '../views/news/theNews.vue'
+import theNews_1 from '../views/news/theNews_1.vue'
+import theNews_2 from '../views/education/theNews_2.vue'
+import theNews_3 from '../views/internationalExchange/theNews_3.vue'
 import activity from '../views/news/activity.vue'
 import curriculum from '../views/news/curriculum.vue'
 import curriculumDesign from '../views/news/curriculumDesign.vue'
@@ -26,14 +30,15 @@ import cooperation from '../views/education/cooperation.vue'
 import innovationAndEntrepreneurship from '../views/education/innovationAndEntrepreneurship.vue'
 import postgraduate from '../views/education/postgraduate.vue'
 import undergraduate from '../views/education/undergraduate.vue'
+import internationalExchange from '../views/internationalExchange/internationalExchange.vue'
 import seminar from '../views/internationalExchange/seminar.vue'
 import EnglishCourse from '../views/internationalExchange/EnglishCourse.vue'
 import designWorkshop from '../views/internationalExchange/designWorkshop.vue'
 import gallery from '../views/gallery/gallery.vue'
 import awardWinningWork from '../views/gallery/awardWinningWork.vue'
 import cooperationAchievements from '../views/gallery/cooperationAchievements.vue'
-import excellentCurriculumDesign_u from '../views/gallery/excellentCurriculumDesign_u.vue'
-import excellentCurriculumDesign_p from '../views/gallery/excellentCurriculumDesign_p.vue'
+import excellentCurriculumDesignU from '../views/gallery/excellentCurriculumDesignU.vue'
+import excellentCurriculumDesignP from '../views/gallery/excellentCurriculumDesignP.vue'
 import excellentGraduationProject from '../views/gallery/excellentGraduationProject.vue'
 Vue.use(VueRouter)
 
@@ -52,17 +57,27 @@ const routes = [{
             {
                 path: 'doctoralSupervisor',
                 component: doctoralSupervisor,
-                name: 'd'
+                name: 'd1'
             },
             {
                 path: 'masterSupervisor',
                 component: masterSupervisor,
-                name: 'e'
+                name: 'd2'
             },
             {
                 path: 'experimentalTeacher',
                 component: experimentalTeacher,
-                name: 'f'
+                name: 'd3'
+            },
+            {
+                path: 'externalFaculty',
+                component: externalFaculty,
+                name: 'd4'
+            },
+            {
+                path: 'retiredTeacher',
+                component: retiredTeacher,
+                name: 'd5'
             },
             {
                 path: 'development',
@@ -85,9 +100,10 @@ const routes = [{
         path: '/education',
         component: education,
         children: [{
-                path: 'alumniAndAlumnae',
+                path: 'alumniAndAlumnae/:year?',
                 component: alumniAndAlumnae,
-                name: 'l'
+                name: 'l',
+                props: route => ({ year: route.params.year })
             },
             {
                 path: 'cooperation',
@@ -108,6 +124,11 @@ const routes = [{
                 path: 'undergraduate',
                 component: undergraduate,
                 name: 'h'
+            },
+            {
+                path: ':category_id/:id',
+                component: theNews_2,
+                props: route => ({ list: route.query.list, current: route.query.current, from: route.query.from })
             }
         ]
     },
@@ -125,13 +146,13 @@ const routes = [{
                 name: 's'
             },
             {
-                path: 'excellentCurriculumDesign_u',
-                component: excellentCurriculumDesign_u,
+                path: 'excellentCurriculumDesignU',
+                component: excellentCurriculumDesignU,
                 name: 'p'
             },
             {
-                path: 'excellentCurriculumDesign_p',
-                component: excellentCurriculumDesign_p,
+                path: 'excellentCurriculumDesignP',
+                component: excellentCurriculumDesignP,
                 name: 'q'
             },
             {
@@ -147,65 +168,88 @@ const routes = [{
         children: [{
                 path: 'activity',
                 component: activity,
-                name: 'z8'
+                name: 'z8',
+                props: route => ({ page: route.query.page })
             },
             {
                 path: 'curriculum',
                 component: curriculum,
-                name: 'z3'
+                name: 'z3',
+                props: route => ({ page: route.query.page })
             },
             {
                 path: 'curriculumDesign',
                 component: curriculumDesign,
-                name: 'z4'
+                name: 'z4',
+                props: route => ({ page: route.query.page })
             },
             {
                 path: 'exhibition',
                 component: exhibition,
-                name: 'z2'
+                name: 'z2',
+                props: route => ({ page: route.query.page })
             },
             {
                 path: 'graduationProject',
                 component: graduationProject,
-                name: 'z5'
+                name: 'z5',
+                props: route => ({ page: route.query.page })
             },
             {
                 path: 'lecture',
                 component: lecture,
-                name: 'z1'
+                name: 'z1',
+                props: route => ({ page: route.query.page })
             },
             {
                 path: 'meeting',
                 component: meeting,
-                name: 'z7'
+                name: 'z7',
+                props: route => ({ page: route.query.page })
             },
             {
                 path: 'success',
                 component: success,
-                name: 'z9'
+                name: 'z9',
+                props: route => ({ page: route.query.page })
             },
             {
                 path: 'workshop',
                 component: workshop,
-                name: 'z6'
+                name: 'z6',
+                props: route => ({ page: route.query.page })
             },
             {
                 path: ':category_id/:id',
-                component: theNews
+                component: theNews_1,
+                props: route => ({ list: route.query.list, current: route.query.current, from: route.query.from })
             }
         ]
     },
     {
-        path: '/internationalExchange/designWorkshop',
-        component: designWorkshop
-    },
-    {
-        path: '/internationalExchange/EnglishCourse',
-        component: EnglishCourse
-    },
-    {
-        path: '/internationalExchange/seminar',
-        component: seminar
+        path: "/internationalExchange",
+        component: internationalExchange,
+        children: [{
+                path: 'designWorkshop',
+                component: designWorkshop,
+                name: "y2"
+            },
+            {
+                path: 'EnglishCourse',
+                component: EnglishCourse,
+                name: "y1"
+            },
+            {
+                path: 'seminar',
+                component: seminar,
+                name: "y3"
+            },
+            {
+                path: ':category_id/:id',
+                component: theNews_3,
+                props: route => ({ list: route.query.list, current: route.query.current, from: route.query.from })
+            }
+        ]
     },
     {
         path: '*',

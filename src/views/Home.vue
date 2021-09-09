@@ -5,12 +5,18 @@
       height="300"
       interval="100000"
       hide-delimiter-background
-      show-arrows-on-hover
+      class="carousel-class"
     >
       <v-carousel-item v-for="(slide, i) in slides" :key="i">
         <v-sheet height="100%">
           <v-row class="fill-height" align="center" justify="center">
-            <img src="../assets/slide_1.jpg" style="height: 100%" />
+            <img
+              :src="slide.src"
+              style="height: 100%"
+              :alt="slide.title"
+              :class="[slide.url == '' ? '' : 'hover-class']"
+              @click="toUrl(slide.url)"
+            />
           </v-row>
         </v-sheet>
       </v-carousel-item>
@@ -18,7 +24,14 @@
     <p class="title-class">最新动态</p>
     <div class="content-class">
       <div class="items-class">
-        <my-news v-for="(item, i) in newsList" :key="i" :data="item" />
+        <my-news
+          v-for="(item, i) in newsList"
+          :key="i"
+          :data="item"
+          :current="i"
+          :list="idList"
+          from="/"
+        />
       </div>
       <v-btn class="btn-class" outlined @click="getMore">
         More
@@ -37,8 +50,9 @@ export default {
     myNews,
   },
   data: () => ({
+    idList: [],
     baseUrl: "http://idesign.tju.edu.cn",
-    slides: ["First", "Second", "Third", "Fourth", "Fifth"],
+    slides: [],
     newsList: [],
     currentLine: 3,
     trans: {
@@ -63,18 +77,22 @@ export default {
           currentPage
       ).then((data) => {
         for (let i = 0; i < data.data.data.length; i++) {
-          if (data.data.data[i]) {
-            this.newsList.push({
-              id: data.data.data[i].id,
-              src: this.baseUrl + "/upload/" + data.data.data[i].more.thumbnail,
-              type: data.data.data[i].category_name.trim(),
-              title: data.data.data[i].post_title.trim(),
-              date: new Date(data.data.data[i].published_time * 1000)
-                .toLocaleString()
-                .split(" ")[0],
-              category_id: data.data.data[i].category_id,
-            });
-          }
+          let x = new Date(data.data.data[i].published_time * 1000);
+          this.newsList.push({
+            id: data.data.data[i].id,
+            src: this.baseUrl + "/upload/" + data.data.data[i].more.thumbnail,
+            type: data.data.data[i].category_name.trim(),
+            title: data.data.data[i].post_title.trim(),
+            date:
+              x.getFullYear() + "/" + (x.getMonth() + 1) + "/" + x.getDate(),
+            category_id: data.data.data[i].category_id,
+          });
+          this.idList +=
+            "" +
+            data.data.data[i].category_id +
+            "_" +
+            data.data.data[i].id +
+            "-";
         }
       });
     },
@@ -89,17 +107,34 @@ export default {
         });
       }
     },
+    toUrl(url) {
+      if (url != "") window.open(url, "_blank");
+    },
   },
   created: function () {
     this.addList(9, 1);
+    service("/portal/api_v1/get_slides").then((data) => {
+      this.slides = [];
+      for (let i = 0; i < data.data.length; i++) {
+        this.slides.push({
+          id: data.data[i].id,
+          title: data.data[i].title,
+          src: this.baseUrl + "/upload/" + data.data[i].image,
+          url: data.data[i].url,
+        });
+      }
+    });
   },
 };
 </script>
 <style scoped>
+.hover-class {
+  cursor: pointer;
+}
 .title-class {
   display: inline-block;
   padding-top: 10px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 26px;
   color: #4e4e4e;
   border-bottom: 3px solid #4e4e4e;
@@ -124,6 +159,23 @@ export default {
   margin-top: 20px;
   margin-bottom: 40px;
 }
+@media screen and (max-width: 1264px) {
+  .content-class {
+    width: 100%;
+  }
+  .items-class {
+    justify-content: space-around;
+  }
+  .title-class {
+    font-size: 22px;
+    padding-top: 8px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .content-class {
+    padding: 0 15px;
+  }
+}
 </style>
 <style>
 .mdi-circle {
@@ -136,6 +188,18 @@ export default {
   margin-left: 17px;
   margin-right: 17px;
 }
+.v-carousel__controls__item .v-btn__content {
+  width: 10px !important;
+  height: 10px !important;
+  margin-left: 17px !important;
+  margin-right: 17px !important;
+}
+.v-carousel__controls .v-btn--round {
+  width: 10px !important;
+  height: 10px !important;
+  margin-left: 17px !important;
+  margin-right: 17px !important;
+}
 .theme--dark.v-btn:hover::before {
   opacity: 0;
 }
@@ -144,5 +208,14 @@ export default {
 }
 .v-carousel__controls {
   bottom: 5px !important;
+}
+.theme--dark.v-icon:focus::after {
+  opacity: 0 !important;
+}
+.v-icon.v-icon::after {
+  opacity: 0 !important;
+}
+.theme--dark.v-btn:focus::before {
+  opacity: 0 !important;
 }
 </style>

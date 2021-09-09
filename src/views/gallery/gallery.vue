@@ -1,6 +1,6 @@
 <template>
   <div class="major-class">
-    <div class="nav-class">
+    <div class="nav-class noselect">
       <div class="h-class" @click="changeStatue">
         <p style="color: #6c6c6c">作品展示</p>
         <v-icon
@@ -11,7 +11,7 @@
       </div>
       <div
         class="h-class h-item-class"
-        :style="statue ? 'max-height: 400px' : 'max-height: 0'"
+        :style="statue ? 'max-height: 700px' : 'max-height: 0'"
       >
         <div style="position: relative" @click="changeSubStatue">
           <p
@@ -36,12 +36,15 @@
         >
           <p
             :style="$route.name == 'p' ? 'font-weight:600;color:#4e4e4e' : ''"
+            class="h-class subH-class"
             @click="to('p')"
           >
             本科生
           </p>
+
           <p
             :style="$route.name == 'q' ? 'font-weight:600;color:#4e4e4e' : ''"
+            class="h-class subH-class"
             @click="to('q')"
           >
             研究生

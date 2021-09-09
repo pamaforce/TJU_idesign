@@ -1,6 +1,6 @@
 <template>
   <div class="major-class">
-    <div class="nav-class">
+    <div class="nav-class noselect">
       <div class="h-class" @click="changeStatue">
         <p style="color: #6c6c6c">人才培养</p>
         <v-icon
@@ -26,23 +26,29 @@
           研究生教学
         </p>
         <p
-          :style="$route.name == 'j' ? 'font-weight:600;color:#4e4e4e' : ''"
+          :style="
+            $route.name == 'j' || $route.params.category_id == 24
+              ? 'font-weight:600;color:#4e4e4e'
+              : ''
+          "
           @click="to('j')"
         >
           校企合作
         </p>
         <p
-          :style="$route.name == 'k' ? 'font-weight:600;color:#4e4e4e' : ''"
+          :style="
+            $route.name == 'k' || $route.params.category_id == 32
+              ? 'font-weight:600;color:#4e4e4e'
+              : ''
+          "
           @click="to('k')"
         >
           创新创业
         </p>
-        <div style="position: relative" @click="changeSubStatue">
+        <div style="position: relative" @click="changeSubStatue(1)">
           <p
             :style="
-              this.$route.name > 'k' && this.$route.name < 'o'
-                ? 'font-weight:600;color:#4e4e4e'
-                : ''
+              this.$route.name == 'l' ? 'font-weight:600;color:#4e4e4e' : ''
             "
             class="h-class subH-class"
           >
@@ -56,41 +62,69 @@
         </div>
         <div
           class="h-class subH-item-class"
-          :style="subStatue ? 'max-height: 400px' : 'max-height: 0'"
-        ></div>
+          :style="subStatue ? 'max-height: 200px' : 'max-height: 0'"
+        >
+          <p
+            v-for="(item, i) in list"
+            :key="i"
+            @click="toXiaoYou(item)"
+            :style="
+              $route.params.year == item ? 'font-weight:600;color:#4e4e4e' : ''
+            "
+          >
+            {{ item }}
+          </p>
+        </div>
       </div>
     </div>
     <router-view class="router-class" />
   </div>
 </template>
 <script>
+import service from "../../utils/request.js";
 export default {
   name: "education",
   data: () => ({
     statue: true,
     subStatue: false,
+    list: [],
   }),
   methods: {
     to(i) {
       if (i != this.$route.name) this.$router.push({ name: i });
     },
+    toXiaoYou(item) {
+      if (item != this.$route.params.year)
+        this.$router.push({ name: "l", params: { year: item } });
+    },
     changeStatue() {
       this.statue = !this.statue;
     },
-    changeSubStatue() {
-      this.subStatue = !this.subStatue;
+    changeSubStatue(item) {
+      if (item == 0 || !this.subStatue) {
+        service("/portal/api_v1/get_xiaoyou_grades").then((data) => {
+          this.list = [];
+          for (let i = 0; i < data.data.length; i++) {
+            this.list.push(data.data[i].id);
+          }
+          if (item == 0) {
+            this.$router.push({ name: "l", params: { year: this.list[0] } });
+            this.subStatue = true;
+          } else this.subStatue = !this.subStatue;
+        });
+      } else this.subStatue = !this.subStatue;
     },
   },
   watch: {
     $route() {
-      if (this.$route.name > "k" && this.$route.name < "o") {
-        this.subStatue = true;
+      if (this.$route.name == "l") {
+        this.changeSubStatue(this.$route.params.year == undefined ? 0 : 1);
       }
     },
   },
   created: function () {
-    if (this.$route.name > "k" && this.$route.name < "o") {
-      this.subStatue = true;
+    if (this.$route.name == "l") {
+      this.changeSubStatue(this.$route.params.year == undefined ? 0 : 1);
     }
   },
 };
@@ -153,6 +187,8 @@ export default {
   -moz-transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
   -o-transform-origin: 0 0;
+  overflow-y: scroll;
+  height: 400px;
 }
 .subH-item-class p {
   font-size: 15px;
@@ -161,5 +197,29 @@ export default {
 .subH-class {
   font-weight: 400;
   font-size: 17px;
+}
+@media screen and (max-width: 1264px) {
+  .router-class {
+    width: calc(100vw - 435px);
+  }
+  .major-class {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .nav-class {
+    display: none;
+  }
+  .major-class {
+    margin-top: 90px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0 15px;
+  }
+  .router-class {
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 }
 </style>

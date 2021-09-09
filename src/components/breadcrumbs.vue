@@ -35,4 +35,12 @@ export default {
   margin: 0px 1px 2px 10px;
   display: inline-block;
 }
+@media screen and (max-width: 768px) {
+  .title-class {
+    font-size: 22px;
+  }
+  .subTitle-class {
+    font-size: 18px;
+  }
+}
 </style>

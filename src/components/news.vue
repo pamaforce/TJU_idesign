@@ -21,10 +21,24 @@ export default {
   name: "myNews",
   props: {
     data: Object,
+    from: String,
+    list: String,
+    current: Number,
   },
   methods: {
     toNews() {
-      this.$router.push("news/" + this.data.category_id + "/" + this.data.id);
+      this.$router.push(
+        "/news/" +
+          this.data.category_id +
+          "/" +
+          this.data.id +
+          "?from=" +
+          this.from +
+          "&list=" +
+          this.list +
+          "&current=" +
+          this.current
+      );
     },
   },
 };
@@ -46,7 +60,6 @@ img:hover {
   display: inline-block;
   margin-top: 25px;
   width: 338px;
-  height: 280px;
 }
 .info-class {
   font-size: 15px;
@@ -59,5 +72,16 @@ img:hover {
 .info-class p {
   display: inline;
   margin-bottom: 2px;
+}
+@media screen and (max-width: 1264px) {
+  .title-class {
+    font-size: 16px;
+  }
+  .info-class {
+    font-size: 13px;
+  }
+  .news-class {
+    height: 260px;
+  }
 }
 </style>

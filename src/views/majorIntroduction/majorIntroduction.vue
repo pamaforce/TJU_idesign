@@ -1,6 +1,6 @@
 <template>
   <div class="major-class">
-    <div class="nav-class">
+    <div class="nav-class noselect">
       <div class="h-class" @click="changeStatue">
         <p style="color: #6c6c6c">专业介绍</p>
         <v-icon
@@ -53,22 +53,34 @@
           :style="subStatue ? 'max-height: 400px' : 'max-height: 0'"
         >
           <p
-            :style="$route.name == 'd' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('d')"
+            :style="$route.name == 'd1' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('d1')"
           >
             博士生导师
           </p>
           <p
-            :style="$route.name == 'e' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('e')"
+            :style="$route.name == 'd2' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('d2')"
           >
             硕士生导师
           </p>
           <p
-            :style="$route.name == 'f' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('f')"
+            :style="$route.name == 'd3' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('d3')"
           >
             实验教师
+          </p>
+          <p
+            :style="$route.name == 'd4' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('d4')"
+          >
+            外聘师资队伍
+          </p>
+          <p
+            :style="$route.name == 'd5' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('d5')"
+          >
+            退休教师
           </p>
         </div>
         <p
@@ -102,13 +114,13 @@ export default {
   },
   watch: {
     $route() {
-      if (this.$route.name > "c" && this.$route.name < "g") {
+      if (this.$route.name > "d0" && this.$route.name < "d6") {
         this.subStatue = true;
       }
     },
   },
   created: function () {
-    if (this.$route.name > "c" && this.$route.name < "g") {
+    if (this.$route.name > "d0" && this.$route.name < "d6") {
       this.subStatue = true;
     }
   },
@@ -124,7 +136,7 @@ export default {
 .major-class {
   position: relative;
   width: 1264px;
-  min-height: 800px;
+  min-height: 600px;
   margin: 0 auto;
   margin-bottom: 190px;
 }
@@ -180,5 +192,29 @@ export default {
 .subH-class {
   font-weight: 400;
   font-size: 17px;
+}
+@media screen and (max-width: 1264px) {
+  .router-class {
+    width: calc(100vw - 435px);
+  }
+  .major-class {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .nav-class {
+    display: none;
+  }
+  .major-class {
+    margin-top: 90px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0 15px;
+  }
+  .router-class {
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 }
 </style>

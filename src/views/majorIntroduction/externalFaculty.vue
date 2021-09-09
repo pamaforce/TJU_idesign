@@ -1,8 +1,8 @@
 <template>
   <div>
-    <my-breadcrumbs title="师资队伍" subTitle="实验教师" />
+    <my-breadcrumbs title="师资队伍" subTitle="外聘师资队伍" />
     <p style="text-align: center; margin: 20px" v-if="isNull">暂无数据</p>
-    <div class="experimentalTeacher-class">
+    <div class="externalFaculty-class">
       <my-teacher
         v-for="(item, i) in teacherList[current_page]"
         :key="i"
@@ -23,7 +23,10 @@ import myBreadcrumbs from "../../components/breadcrumbs.vue";
 import myTeacher from "../../components/teacher.vue";
 import service from "../../utils/request.js";
 export default {
-  name: "experimentalTeacher",
+  name: "externalFaculty",
+  props: {
+    page: String,
+  },
   components: {
     myBreadcrumbs,
     myTeacher,
@@ -41,7 +44,7 @@ export default {
       service(
         "/portal/api_v1/get_teacher_by_type?per_page=16&current_page=" +
           c +
-          "&big_type=3"
+          "&big_type=4"
       ).then((data) => {
         let flag = true;
         this.teacherList[c] = [];
@@ -80,12 +83,12 @@ export default {
     },
   },
   created: function () {
-    this.fillList(1);
+    this.fillList(isNaN(parseInt(this.page)) ? 1 : parseInt(this.page));
   },
 };
 </script>
 <style scoped>
-.experimentalTeacher-class {
+.externalFaculty-class {
   display: flex;
   width: 100%;
   justify-content: space-between;

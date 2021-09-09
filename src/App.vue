@@ -12,15 +12,16 @@ import myNavigation from "./components/navigation.vue";
 
 export default {
   name: "App",
-
   components: {
     myNavigation,
     myFooter,
   },
-
-  data: () => ({
-    //
-  }),
+  created: function () {
+    console.log(
+      "%cIf you find bugs in the website, you can email to 3020205094@tju.edu.cn and let's make it better together! :)",
+      "color: #43bb88;font-size:19px;font-weight: bold;"
+    );
+  },
 };
 </script>
 <style>

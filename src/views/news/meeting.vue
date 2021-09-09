@@ -55,13 +55,13 @@ export default {
         this.idList[c] = [];
         for (let i = 0; i < 12; i++) {
           if (data.data.data[i]) {
+            let x = new Date(data.data.data[i].published_time * 1000);
             this.cardList[c].push({
               id: data.data.data[i].id,
               src: this.baseUrl + "/upload/" + data.data.data[i].more.thumbnail,
               title: data.data.data[i].post_title.trim(),
-              date: new Date(data.data.data[i].published_time * 1000)
-                .toLocaleString()
-                .split(" ")[0],
+              date:
+                x.getFullYear() + "/" + (x.getMonth() + 1) + "/" + x.getDate(),
               category_id: data.data.data[i].category_id,
             });
             this.idList[c] +=

@@ -1,7 +1,11 @@
 <template>
   <div class="development-class">
     <my-breadcrumbs title="发展历程" />
-    <img src="../../assets/development.jpg" style="width: 100%" />
+    <img
+      v-image-preview
+      src="../../assets/development.jpg"
+      style="width: 100%"
+    />
     <p>1984年，成立学科并为工科学生开设工业设计课程；</p>
     <p>1986年，举办全国工业设计师生培训；</p>
     <p>

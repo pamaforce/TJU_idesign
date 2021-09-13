@@ -81,7 +81,8 @@ export default {
 <style scoped>
 .card-class {
   width: 250px;
-  height: 215px;
+  min-height: 180px;
+  height: auto;
   /* background-color: blueviolet; */
   margin-top: 15px;
   margin-bottom: 25px;
@@ -112,7 +113,7 @@ export default {
 @media screen and (max-width: 768px) {
   .card-class {
     width: calc(100vw - 30px);
-    height: calc(86vw - 25.8px);
+    height: auto;
   }
   .card-class img {
     width: calc(100vw - 30px);

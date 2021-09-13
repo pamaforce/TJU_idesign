@@ -1,18 +1,12 @@
 <template>
   <div style="text-align: center; padding-top: 69px">
-    <v-carousel
-      cycle
-      height="300"
-      interval="100000"
-      hide-delimiter-background
-      class="carousel-class"
-    >
+    <v-carousel cycle height="300" interval="100000" hide-delimiter-background>
       <v-carousel-item v-for="(slide, i) in slides" :key="i">
         <v-sheet height="100%">
           <v-row class="fill-height" align="center" justify="center">
             <img
               :src="slide.src"
-              style="height: 100%"
+              style="height: 300px"
               :alt="slide.title"
               :class="[slide.url == '' ? '' : 'hover-class']"
               @click="toUrl(slide.url)"
@@ -51,7 +45,6 @@ export default {
   },
   data: () => ({
     idList: [],
-    baseUrl: "http://idesign.tju.edu.cn",
     slides: [],
     newsList: [],
     currentLine: 3,
@@ -80,7 +73,7 @@ export default {
           let x = new Date(data.data.data[i].published_time * 1000);
           this.newsList.push({
             id: data.data.data[i].id,
-            src: this.baseUrl + "/upload/" + data.data.data[i].more.thumbnail,
+            src: "upload/" + data.data.data[i].more.thumbnail,
             type: data.data.data[i].category_name.trim(),
             title: data.data.data[i].post_title.trim(),
             date:
@@ -119,7 +112,7 @@ export default {
         this.slides.push({
           id: data.data[i].id,
           title: data.data[i].title,
-          src: this.baseUrl + "/upload/" + data.data[i].image,
+          src: "upload/" + data.data[i].image,
           url: data.data[i].url,
         });
       }

@@ -1,6 +1,6 @@
 <template>
   <div class="major-class">
-    <div class="nav-class noselect">
+    <div class="nav-class noselect" v-if="!isDetail">
       <div class="h-class" @click="changeStatue">
         <p style="color: #6c6c6c">作品展示</p>
         <v-icon
@@ -39,7 +39,7 @@
             class="h-class subH-class"
             @click="to('p')"
           >
-            本科生
+            本科阶段
           </p>
 
           <p
@@ -47,7 +47,7 @@
             class="h-class subH-class"
             @click="to('q')"
           >
-            研究生
+            硕士阶段
           </p>
         </div>
         <p
@@ -70,7 +70,7 @@
         </p>
       </div>
     </div>
-    <router-view class="router-class" />
+    <router-view :class="[isDetail ? 'detail-router-class' : 'router-class']" />
   </div>
 </template>
 <script>
@@ -79,6 +79,7 @@ export default {
   data: () => ({
     statue: true,
     subStatue: false,
+    isDetail: false,
   }),
   methods: {
     to(i) {
@@ -93,12 +94,16 @@ export default {
   },
   watch: {
     $route() {
+      if (this.$route.name == "detail") this.isDetail = true;
+      else this.isDetail = false;
       if (this.$route.name > "o" && this.$route.name < "r") {
         this.subStatue = true;
       }
     },
   },
   created: function () {
+    if (this.$route.name == "detail") this.isDetail = true;
+    else this.isDetail = false;
     if (this.$route.name > "o" && this.$route.name < "r") {
       this.subStatue = true;
     }
@@ -177,5 +182,40 @@ export default {
   margin-bottom: 5px;
   border-bottom: 1px solid #4e4e4e;
   padding-bottom: 5px;
+}
+.detail-router-class {
+  position: relative;
+  padding: 30px 75px;
+  top: 80px;
+  left: 0;
+  width: 100%;
+}
+@media screen and (max-width: 1264px) {
+  .router-class {
+    width: calc(100vw - 435px);
+  }
+  .major-class {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .nav-class {
+    display: none;
+  }
+  .major-class {
+    margin-top: 90px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0 15px;
+  }
+  .router-class {
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .detail-router-class {
+    top: 0;
+    padding: 0;
+  }
 }
 </style>

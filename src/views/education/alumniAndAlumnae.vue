@@ -37,7 +37,6 @@ export default {
     current_page: 0,
     last_page: 1,
     isNull: true,
-    baseUrl: "http://idesign.tju.edu.cn",
     teacherList: [],
   }),
   methods: {
@@ -54,7 +53,7 @@ export default {
           if (data.data.data[i]) {
             this.teacherList[c].push({
               name: data.data.data[i].name,
-              avatar: this.baseUrl + "/upload/" + data.data.data[i].avatar,
+              avatar: "upload/" + data.data.data[i].avatar,
               desc:
                 data.data.data[i].ttitle +
                 " | " +

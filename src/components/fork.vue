@@ -47,7 +47,7 @@ export default {
             query: { page: this.from.split("_")[1] },
           });
       } else {
-        this.$router.push("/");
+        this.$router.go(-1);
       }
     },
     toPre() {

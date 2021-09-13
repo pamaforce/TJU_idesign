@@ -40,6 +40,7 @@ import cooperationAchievements from '../views/gallery/cooperationAchievements.vu
 import excellentCurriculumDesignU from '../views/gallery/excellentCurriculumDesignU.vue'
 import excellentCurriculumDesignP from '../views/gallery/excellentCurriculumDesignP.vue'
 import excellentGraduationProject from '../views/gallery/excellentGraduationProject.vue'
+import detail from '../views/gallery/detail.vue'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -159,7 +160,13 @@ const routes = [{
                 path: 'excellentGraduationProject',
                 component: excellentGraduationProject,
                 name: 'r'
-            }
+            },
+            {
+                path: ':category_id/:id',
+                component: detail,
+                name: 'detail',
+                props: route => ({ list: route.query.list, current: route.query.current, from: route.query.from })
+            },
         ]
     },
     {

@@ -41,7 +41,6 @@ export default {
     last_page: 1,
     isNull: true,
     cardList: [],
-    baseUrl: "http://idesign.tju.edu.cn",
   }),
   methods: {
     fillList(c) {
@@ -58,7 +57,7 @@ export default {
             let x = new Date(data.data.data[i].published_time * 1000);
             this.cardList[c].push({
               id: data.data.data[i].id,
-              src: this.baseUrl + "/upload/" + data.data.data[i].more.thumbnail,
+              src: "upload/" + data.data.data[i].more.thumbnail,
               title: data.data.data[i].post_title.trim(),
               date:
                 x.getFullYear() + "/" + (x.getMonth() + 1) + "/" + x.getDate(),

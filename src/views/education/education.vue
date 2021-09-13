@@ -72,7 +72,7 @@
               $route.params.year == item ? 'font-weight:600;color:#4e4e4e' : ''
             "
           >
-            {{ item }}
+            {{ item }}届
           </p>
         </div>
       </div>
@@ -112,7 +112,7 @@ export default {
             this.subStatue = true;
           } else this.subStatue = !this.subStatue;
         });
-      } else this.subStatue = !this.subStatue;
+      }
     },
   },
   watch: {

@@ -64,13 +64,13 @@
             :style="$route.name == 'z4' ? 'font-weight:600;color:#4e4e4e' : ''"
             @click="to('z4')"
           >
-            课设
+            课程设计
           </p>
           <p
             :style="$route.name == 'z5' ? 'font-weight:600;color:#4e4e4e' : ''"
             @click="to('z5')"
           >
-            毕设
+            毕业设计
           </p>
           <p
             :style="$route.name == 'z6' ? 'font-weight:600;color:#4e4e4e' : ''"

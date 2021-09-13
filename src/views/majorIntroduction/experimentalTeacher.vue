@@ -33,7 +33,6 @@ export default {
     current_page: 0,
     last_page: 1,
     isNull: true,
-    baseUrl: "http://idesign.tju.edu.cn",
     teacherList: [],
   }),
   methods: {
@@ -49,7 +48,7 @@ export default {
           if (data.data.data[i]) {
             this.teacherList[c].push({
               name: data.data.data[i].name,
-              avatar: this.baseUrl + "/upload/" + data.data.data[i].avatar,
+              avatar: "upload/" + data.data.data[i].avatar,
               desc:
                 data.data.data[i].ttitle +
                 " | " +
@@ -59,6 +58,7 @@ export default {
               email: data.data.data[i].email,
               major: data.data.data[i].major,
               url: data.data.data[i].url,
+              show_level: data.data.data[i].show_level,
             });
           } else if (flag) {
             if (parseInt(i / 4) == parseInt((i - 1) / 4) && i)
@@ -66,6 +66,9 @@ export default {
             else flag = false;
           }
         }
+        this.teacherList[c].sort((a, b) => {
+          return a.show_level - b.show_level;
+        });
         this.current_page = c;
         this.last_page = data.data.last_page;
         this.isNull = this.teacherList[this.current_page].length == 0;

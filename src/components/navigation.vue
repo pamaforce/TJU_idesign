@@ -1,9 +1,9 @@
 <template>
   <div class="navigation-class">
     <div class="main-content noselect">
-      <a href="http://www.tju.edu.cn/" target="_blank"
-        ><img src="../assets/logo_tju.jpg" class="logo-tju-class"
-      /></a>
+      <router-link to="/"
+        ><img src="../assets/logo_tju.jpg" class="logo-tju-class" />
+      </router-link>
       <div class="division-class"></div>
       <router-link to="/">
         <img src="../assets/logo_idesign.png" class="logo-idesign-class" />
@@ -175,11 +175,33 @@
           </div>
           <div
             class="h-class h-item-class"
-            :style="this.statue == 1 ? 'max-height: 300px' : 'max-height: 0'"
+            :style="this.statue == 1 ? 'max-height: 400px' : 'max-height: 0'"
           >
             <router-link to="/news/lecture">讲座</router-link>
             <router-link to="/news/exhibition">展览</router-link>
-            <router-link to="/news/curriculum">学习</router-link>
+            <div class="h-class subH-class" @click="changeSubStatue_2">
+              <p>学习</p>
+              <v-icon
+                :class="[this.subStatue_2 ? '' : 'rotated']"
+                style="
+                  position: absolute;
+                  right: 0;
+                  top: 5px;
+                  color: white;
+                  font-weight: 400;
+                "
+                >mdi-chevron-down</v-icon
+              >
+            </div>
+            <div
+              class="h-class subH-item-class"
+              :style="this.subStatue_2 ? 'max-height: 300px' : 'max-height: 0'"
+            >
+              <router-link to="/news/curriculum">课程</router-link>
+              <router-link to="/news/curriculumDesign">课程设计</router-link
+              ><router-link to="/news/graduationProject">毕业设计</router-link
+              ><router-link to="/news/workshop">工作坊</router-link>
+            </div>
             <router-link to="/news/meeting">会议</router-link>
             <router-link to="/news/activity">活动</router-link>
             <router-link to="/news/success">捷报</router-link>
@@ -283,10 +305,10 @@
               :style="this.subStatue ? 'max-height: 300px' : 'max-height: 0'"
             >
               <router-link to="/gallery/excellentCurriculumDesignU"
-                >本科生</router-link
+                >本科阶段</router-link
               >
               <router-link to="/gallery/excellentCurriculumDesignP"
-                >研究生</router-link
+                >硕士阶段</router-link
               >
             </div>
             <router-link to="/gallery/excellentGraduationProject"
@@ -313,6 +335,7 @@ export default {
     statue: -1,
     subStatue: false,
     subStatue_1: false,
+    subStatue_2: false,
     yearList: [],
   }),
   methods: {
@@ -339,6 +362,9 @@ export default {
     },
     changeSubStatue_1() {
       this.subStatue_1 = !this.subStatue_1;
+    },
+    changeSubStatue_2() {
+      this.subStatue_2 = !this.subStatue_2;
     },
   },
   watch: {
@@ -400,7 +426,7 @@ a {
   top: 17px;
   right: 75px;
   padding: 0 20px !important;
-  font-size: 20px;
+  font-size: 14px;
 }
 .btn-class:hover + .gap-class {
   display: block;

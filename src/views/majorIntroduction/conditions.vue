@@ -1,7 +1,8 @@
 <template>
   <div class="conditions-class">
     <my-breadcrumbs title="办学条件" />
-    <p style="font-weight: 700">
+    <div v-html="html" style="margin-top: 20px" id="theNews"></div>
+    <!-- <p style="font-weight: 700">
       天津大学工业设计专业始建于1986年，现为教育部批准的“卓越工程师培养计划”专业，有全国较早的工业设计学科硕士点和博士点。由中国科学评价研究中心（RCCSE）、武汉大学中国教育质量评价中心联合中国科教评价网推出的《2016年中国大学及学科专业评价报告》中，天津大学工业设计专业本科生和研究生教育分列第二第一。
     </p>
     <p>
@@ -20,25 +21,50 @@
       v-image-preview
       src="../../assets/conditions_2.jpg"
       style="width: 100%"
-    />
+    /> -->
   </div>
 </template>
 <script>
 import myBreadcrumbs from "../../components/breadcrumbs.vue";
+import service from "../../utils/request.js";
 export default {
   name: "conditions",
   components: {
     myBreadcrumbs,
   },
+  data: () => ({
+    html: "",
+  }),
+  methods: {
+    findPage() {
+      service("/portal/api_v1/get_page?id=127").then((data) => {
+        this.html = data.data.post_content;
+      });
+    },
+  },
+  watch: {
+    $route() {
+      this.findPage();
+    },
+  },
+  created: function () {
+    this.findPage();
+  },
 };
 </script>
 <style scoped>
-.conditions-class {
+/* .conditions-class {
   text-align: justify;
 }
 .conditions-class p {
   margin-top: 20px;
   font-size: 16px;
   color: #6c6c6c;
+} */
+#theNews img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 0 auto;
 }
 </style>

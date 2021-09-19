@@ -1,7 +1,8 @@
 <template>
   <div class="development-class">
     <my-breadcrumbs title="发展历程" />
-    <img
+    <div v-html="html" style="margin-top: 20px" id="theNews"></div>
+    <!-- <img
       v-image-preview
       src="../../assets/development.jpg"
       style="width: 100%"
@@ -43,25 +44,50 @@
     <p>
       2018年，开设第一门双语选修课；参与本科生审核评估；连续五年参与亚洲联合设计工坊；
     </p>
-    <p>2019年，举办首届校友论坛；连续 5 年举办设计年展......</p>
+    <p>2019年，举办首届校友论坛；连续 5 年举办设计年展......</p> -->
   </div>
 </template>
 <script>
 import myBreadcrumbs from "../../components/breadcrumbs.vue";
+import service from "../../utils/request.js";
 export default {
   name: "development",
   components: {
     myBreadcrumbs,
   },
+  data: () => ({
+    html: "",
+  }),
+  methods: {
+    findPage() {
+      service("/portal/api_v1/get_page?id=126").then((data) => {
+        this.html = data.data.post_content;
+      });
+    },
+  },
+  watch: {
+    $route() {
+      this.findPage();
+    },
+  },
+  created: function () {
+    this.findPage();
+  },
 };
 </script>
 <style scoped>
-.development-class {
+/* .development-class {
   text-align: justify;
 }
 .development-class p {
   margin-top: 20px;
   font-size: 16px;
   color: #6c6c6c;
+} */
+#theNews img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 0 auto;
 }
 </style>

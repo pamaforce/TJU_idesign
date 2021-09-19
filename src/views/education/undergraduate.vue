@@ -1,7 +1,8 @@
 <template>
   <div class="undergraduate-class">
     <my-breadcrumbs title="本科生教学" />
-    <p style="font-weight: 700">
+    <div v-html="html" style="margin-top: 20px" id="theNews"></div>
+    <!-- <p style="font-weight: 700">
       工业设计本科生阶段一直以培养优秀的理论与实践相结合的人才为目标，结合工科背景，发掘和培养优秀的设计人才。2017
       年，专业的本科生在学校的大力支持下由1 个班增加到2
       个班，为新的设计教育增强了力量。从2018
@@ -32,7 +33,7 @@
     <p>
       为大力推动“新工科”建设、搭建科学的设计教育学科体系、推动创新创业教育的发展。2018
       年，工业设计与工商管理、工业工程联合，在宣怀学院开设卓业英才实验班，进行创新设计与卓越创业教育。实验班采取学分制教学模式，通过理论与专业课程加基于项目实践的方式，建构起包含设计、管理、商业、材料、医疗、经济、法律等多领域知识交叉融合的设计教育体系，并将致力于在医疗健康、出行工具、智能设备、大数据等领域凝练专业特色，创造人才培养的“弹性空间”，培养能够定义产品或服务、提供整体解决方案、具备良好团队合作和沟通能力的复合型人才。
-    </p>
+    </p>-->
     <div class="download-class">
       <p>文件下载</p>
       <p>
@@ -68,15 +69,50 @@
 </template>
 <script>
 import myBreadcrumbs from "../../components/breadcrumbs.vue";
+import service from "../../utils/request.js";
 export default {
   name: "undergraduate",
   components: {
     myBreadcrumbs,
   },
+  data: () => ({
+    html: "",
+  }),
+  methods: {
+    findPage() {
+      service("/portal/api_v1/get_page?id=129").then((data) => {
+        this.html = data.data.post_content;
+      });
+    },
+  },
+  watch: {
+    $route() {
+      this.findPage();
+    },
+  },
+  created: function () {
+    this.findPage();
+  },
 };
 </script>
 <style scoped>
-.undergraduate-class {
+.download-class p {
+  color: #4e4e4e;
+  font-size: 13px;
+  margin: 8px 0px;
+}
+.download-class a {
+  text-decoration: none;
+  color: #4e4e4e;
+  font-size: 13px;
+}
+#theNews img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 0 auto;
+}
+/* .undergraduate-class {
   text-align: justify;
 }
 .undergraduate-class p {
@@ -96,7 +132,7 @@ export default {
   text-decoration: none;
   color: #4e4e4e;
   font-size: 13px;
-}
+}*/
 @media screen and (max-width: 768px) {
   .download-class p {
     font-size: 11px;

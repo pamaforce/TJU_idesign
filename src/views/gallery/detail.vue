@@ -232,7 +232,6 @@ export default {
     },
     showVideo() {
       this.show = true;
-      console.log("yes");
     },
   },
   created: function () {
@@ -377,7 +376,7 @@ export default {
   }
   .great-class {
     width: calc(27vw - 40.5px);
-    height: calc(40.5vw - 60.75px);
+    height: calc(48vw - 72px);
   }
 }
 @media screen and (max-width: 960px) {
@@ -426,11 +425,11 @@ export default {
   .flex-class {
     display: block;
     width: calc(100vw - 30px);
-    margin: 5px 0;
+    margin: 0;
   }
   .great-class {
     width: calc(100vw - 30px);
-    height: calc(150vw - 45px);
+    height: calc(177.78vw - 53.33px);
     margin: 5px 0;
     order: -1;
   }

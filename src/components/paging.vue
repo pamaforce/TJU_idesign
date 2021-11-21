@@ -1,6 +1,8 @@
 <template>
   <div class="paging-class noselect">
-    <v-icon class="arrow-class" @click="preIndex">mdi-menu-left</v-icon>
+    <v-icon class="arrow-class" @click="preIndex" v-if="totalIndex > 0"
+      >mdi-menu-left</v-icon
+    >
     <p
       class="index-class"
       v-for="item in totalIndex"
@@ -10,7 +12,9 @@
     >
       {{ item }}
     </p>
-    <v-icon class="arrow-class" @click="nextIndex">mdi-menu-right</v-icon>
+    <v-icon class="arrow-class" @click="nextIndex" v-if="totalIndex > 0"
+      >mdi-menu-right</v-icon
+    >
   </div>
 </template>
 <script>
@@ -22,15 +26,22 @@ export default {
   },
   methods: {
     changeIndex(index) {
-      if (index != this.currentIndex) this.$emit("changeIndex", index);
+      if (index != this.currentIndex) {
+        window.scrollTo(0, 0);
+        this.$emit("changeIndex", index);
+      }
     },
     preIndex() {
-      if (this.currentIndex > 1)
+      if (this.currentIndex > 1) {
+        window.scrollTo(0, 0);
         this.$emit("changeIndex", this.currentIndex - 1);
+      }
     },
     nextIndex() {
-      if (this.currentIndex < this.totalIndex)
+      if (this.currentIndex < this.totalIndex) {
+        window.scrollTo(0, 0);
         this.$emit("changeIndex", this.currentIndex + 1);
+      }
     },
   },
 };

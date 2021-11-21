@@ -70,7 +70,11 @@
         </p>
       </div>
     </div>
-    <router-view :class="[isDetail ? 'detail-router-class' : 'router-class']" />
+    <keep-alive>
+      <router-view
+        :class="[isDetail ? 'detail-router-class' : 'router-class']"
+      />
+    </keep-alive>
   </div>
 </template>
 <script>

@@ -7,6 +7,9 @@
         v-for="(item, i) in detailList[current_page]"
         :key="i"
         :data="item"
+        :current="i"
+        :list="idList"
+        from="/gallery/awardWinningWork"
       />
       <my-paging
         :totalIndex="last_page"
@@ -36,6 +39,7 @@ export default {
     last_page: 1,
     isNull: true,
     detailList: [],
+    idList: "",
   }),
   methods: {
     fillDetailList(c) {
@@ -58,6 +62,12 @@ export default {
               id: data.data.data[i].id,
               category_id: 4,
             });
+            this.idList +=
+              "" +
+              data.data.data[i].category_id +
+              "_" +
+              data.data.data[i].id +
+              "-";
           } else if (flag) {
             if (parseInt(i / 3) == parseInt((i - 1) / 3) && i)
               this.detailList[c].push({});
@@ -77,7 +87,7 @@ export default {
       }
     },
   },
-  created: function () {
+  created() {
     this.fillDetailList(isNaN(parseInt(this.page)) ? 1 : parseInt(this.page));
   },
 };

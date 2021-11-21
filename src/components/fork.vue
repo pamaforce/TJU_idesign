@@ -103,7 +103,7 @@ export default {
     this.canNext =
       this.list != undefined &&
       this.current != undefined &&
-      parseInt(this.current) < this.list.split("-").length - 1;
+      parseInt(this.current) < this.list.split("-").length - 2;
   },
 };
 </script>

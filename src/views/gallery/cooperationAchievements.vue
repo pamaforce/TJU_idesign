@@ -13,6 +13,9 @@
           v-for="(item, i) in detailList[current_page_1]"
           :key="i"
           :data="item"
+          :current="i"
+          :list="idList"
+          from="/gallery/cooperationAchievements"
         />
         <my-paging
           :totalIndex="last_page_1"
@@ -69,6 +72,7 @@ export default {
     detailData: {},
     current_page_1: 0,
     last_page_1: 1,
+    idList: "",
   }),
   methods: {
     fillList(c) {
@@ -121,6 +125,12 @@ export default {
               id: data.data.data[i].id,
               category_id: this.detailData.id,
             });
+            this.idList +=
+              "" +
+              data.data.data[i].category_id +
+              "_" +
+              data.data.data[i].id +
+              "-";
           } else if (flag) {
             if (parseInt(i / 3) == parseInt((i - 1) / 3) && i)
               this.detailList[c].push({});
@@ -156,7 +166,7 @@ export default {
       this.statue = true;
     },
   },
-  created: function () {
+  created() {
     this.fillList(isNaN(parseInt(this.page)) ? 1 : parseInt(this.page));
   },
 };

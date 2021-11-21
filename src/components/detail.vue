@@ -21,6 +21,9 @@ export default {
   name: "myDetail",
   props: {
     data: Object,
+    from: String,
+    list: String,
+    current: Number,
   },
   data: () => ({
     isPhone: false,
@@ -28,7 +31,7 @@ export default {
   methods: {
     toDetail() {
       this.$router.push(
-        "/gallery/" + this.data.category_id + "/" + this.data.id
+        `/gallery/${this.data.category_id}/${this.data.id}?from=${this.from}&list=${this.list}&current=${this.current}`
       );
     },
   },

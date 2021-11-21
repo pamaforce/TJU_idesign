@@ -1,5 +1,9 @@
 <template>
   <div class="detail-class">
+    <div class="back-class noselect" @click="toBack">
+      <div></div>
+      <span>返回</span>
+    </div>
     <p class="title-class">{{ data.post_title }}</p>
     <p class="title-en-class">{{ data.post_title_en }}</p>
     <v-row no-gutters style="margin-bottom: 30px">
@@ -44,7 +48,7 @@
                 :key="i"
                 class="author-class"
               >
-                <img v-image-preview :src="'upload/' + item.url" />
+                <img v-image-preview :src="staticBaseUrl + item.url" />
                 <p>{{ item.zh_names }}</p>
                 <p>{{ item.en_names }}</p>
                 <p>{{ item.grade }}</p>
@@ -89,31 +93,31 @@
           </div>
           <img
             v-image-preview
-            :src="'upload/' + data.photos[0].url"
+            :src="staticBaseUrl + data.photos[0].url"
             style="width: 100%"
           />
         </div>
         <img
           v-image-preview
-          :src="'upload/' + data.photos[1].url"
+          :src="staticBaseUrl + data.photos[1].url"
           style="width: 100%"
         />
       </div>
       <div class="great-class">
         <img
           v-image-preview
-          :src="'upload/' + data.photos[2].url"
+          :src="staticBaseUrl + data.photos[2].url"
           style="width: 100%; height: 100%"
         />
       </div>
       <div class="flex-class">
         <img
           v-image-preview
-          :src="'upload/' + data.photos[3].url"
+          :src="staticBaseUrl + data.photos[3].url"
           style="width: 100%"
         /><img
           v-image-preview
-          :src="'upload/' + data.photos[4].url"
+          :src="staticBaseUrl + data.photos[4].url"
           style="width: 100%"
         />
       </div>
@@ -128,13 +132,23 @@
         without permission.
       </p></v-row
     >
-    <my-fork style="margin-top: 40px" />
+    <div class="fork-class noselect">
+      <div
+        :class="{ 'fork-icon-class-1': true, 'disable-class': !canPre }"
+        @click="toPre"
+      ></div>
+      <div class="fork-text-class" @click="toBack">返回作品列表</div>
+      <div
+        :class="{ 'fork-icon-class-2': true, 'disable-class': !canNext }"
+        @click="toNext"
+      ></div>
+    </div>
     <div v-show="show" class="video-class" @click="show = false">
       <div @click.stop="pre" class="main-video-class">
         <video-player
           class="video-player vjs-custom-skin"
           ref="videoPlayer"
-          @click.stop="pre"
+          @click.stop="() => {}"
           :playsinline="true"
           :options="playerOptions"
         >
@@ -144,7 +158,6 @@
   </div>
 </template>
 <script>
-import myFork from "../../components/fork.vue";
 import service from "../../utils/request.js";
 import { videoPlayer } from "vue-video-player";
 import "video.js/dist/video-js.css";
@@ -152,7 +165,6 @@ import "video.js/dist/video-js.css";
 export default {
   name: "detail",
   components: {
-    myFork,
     videoPlayer,
   },
   props: {
@@ -162,6 +174,9 @@ export default {
   },
   data: () => ({
     show: false,
+    canPre: false,
+    canNext: false,
+    staticBaseUrl: "upload/",
     data: {
       post_title: "",
       post_title_en: "",
@@ -204,7 +219,41 @@ export default {
     },
   }),
   methods: {
-    pre() {},
+    toBack() {
+      this.$router.push(this.from);
+    },
+    toPre() {
+      if (this.canPre) {
+        let arr = this.list.split("-");
+        arr.forEach((str, index, arr) => {
+          arr[index] = str.split("_").join("/");
+        });
+        this.$router.push({
+          path: "/gallery/" + arr[parseInt(this.current) - 1],
+          query: {
+            from: this.from,
+            list: this.list,
+            current: parseInt(this.current) - 1,
+          },
+        });
+      }
+    },
+    toNext() {
+      if (this.canNext) {
+        let arr = this.list.split("-");
+        arr.forEach((str, index, arr) => {
+          arr[index] = str.split("_").join("/");
+        });
+        this.$router.push({
+          path: "/gallery/" + arr[parseInt(this.current) + 1],
+          query: {
+            from: this.from,
+            list: this.list,
+            current: parseInt(this.current) + 1,
+          },
+        });
+      }
+    },
     findDetail() {
       service(
         "/portal/api_v1/get_design_detail?category_id=" +
@@ -222,24 +271,78 @@ export default {
         this.data.intro_en = data.data.intro_en;
         this.data.tutors_zh = data.data.tutors_zh;
         this.data.tutors_en = data.data.tutors_en;
-        this.data.thumbnail = "upload/" + data.data.more.thumbnail;
+        this.data.thumbnail = this.staticBaseUrl + data.data.more.thumbnail;
         this.data.photos = data.data.more.photos;
         this.data.authors = data.data.more.authors;
-        this.data.isVideo = data.data.more.files.length != 0;
-        this.playerOptions.sources[0].src =
-          "upload/" + data.data.more.files[0].url;
+        this.data.isVideo = data.data.more.files?.length > 0;
+        this.playerOptions.sources[0].src = this.data.isVideo
+          ? this.staticBaseUrl + data.data.more.files[0].url
+          : "";
       });
     },
     showVideo() {
       this.show = true;
     },
+    initData() {
+      this.findDetail();
+      this.canPre =
+        this.list != undefined &&
+        this.current != undefined &&
+        parseInt(this.current) > 0;
+      this.canNext =
+        this.list != undefined &&
+        this.current != undefined &&
+        parseInt(this.current) < this.list.split("-").length - 2;
+    },
   },
-  created: function () {
-    this.findDetail();
+  watch: {
+    $route() {
+      this.initData();
+    },
+  },
+  created() {
+    this.initData();
   },
 };
 </script>
 <style scoped>
+.disable-class {
+  opacity: 0.6;
+  cursor: not-allowed !important;
+}
+.fork-class {
+  margin-top: 50px;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.fork-class div {
+  border: 1px solid #4e4e4e;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.fork-icon-class-1 {
+  width: 36px;
+  height: 36px;
+  background-image: url("../../assets/left.png");
+  background-size: 24px 24px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.fork-icon-class-2 {
+  width: 36px;
+  height: 36px;
+  background-image: url("../../assets/right.png");
+  background-size: 24px 24px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.fork-text-class {
+  padding: 5px 25px;
+  margin: 0 25px;
+  color: #4e4e4e;
+}
 .title-class {
   font-size: 32px;
   color: #4e4e4e;
@@ -270,15 +373,16 @@ export default {
   font-family: "Montserrat";
 }
 .t1-content-class {
-  margin: 5px 15px;
-  padding-left: 8px;
+  margin: 0 15px;
+  padding-left: 15px;
   border-left: 2px solid #4e4e4e;
   text-align: left;
 }
 .t1-content-class p {
   white-space: nowrap;
-  margin-bottom: 2px;
+  margin-bottom: 0;
   font-size: 13px;
+  line-height: 24px;
   font-family: "Montserrat";
 }
 .authors-class {
@@ -287,16 +391,20 @@ export default {
   flex-wrap: wrap;
 }
 .author-class {
-  margin: 0 6px;
+  margin: 0 10px;
+  margin-bottom: 10px;
   text-align: center;
-  min-width: 92px;
+  width: 85px;
 }
 .author-class img {
   width: 85px;
   height: 85px;
 }
 .author-class p {
+  white-space: normal;
+  word-wrap: break-word;
   margin-bottom: 0;
+  width: 85px;
 }
 .right-class {
   text-align: right;
@@ -367,6 +475,29 @@ export default {
   width: 600px;
   height: 340px;
 }
+.back-class {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  width: 75px;
+  cursor: pointer;
+}
+.back-class div {
+  width: 25px;
+  height: 25px;
+  border-radius: 50% 50%;
+  background-image: url("../../assets/back.png");
+  background-size: 18px 18px;
+  background-position: 3px center;
+  background-repeat: no-repeat;
+  background-color: #4e4e4e;
+  margin-right: 7px;
+}
+.back-class span {
+  font-size: 16px;
+  color: #4e4e4e;
+  line-height: 28px;
+}
 @media screen and (max-width: 1264px) {
   .flex-class {
     display: flex;
@@ -390,9 +521,10 @@ export default {
     padding-left: 0;
   }
   .author-class {
-    min-width: 82px;
+    width: 60px;
   }
   .author-class p {
+    width: 60px;
     font-size: 10px;
   }
   .author-class img {

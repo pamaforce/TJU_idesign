@@ -1,11 +1,19 @@
 <template>
   <div class="news-class">
     <template v-if="JSON.stringify(data) != '{}'">
-      <img
-        style="width: 100%; height: 190px; cursor: pointer"
-        @click="toNews"
+      <v-img
+        lazy-src="../assets/photo.jpg"
         :src="data.src"
-      />
+        @click="toNews"
+        style="width: 100%; height: 190px; cursor: pointer"
+        ><template v-slot:placeholder>
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row> </template
+      ></v-img>
       <div class="info-class">
         <p>[{{ data.type }}]</p>
         <p>{{ data.date }}</p>

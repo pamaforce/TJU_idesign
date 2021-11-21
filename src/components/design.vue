@@ -8,7 +8,15 @@
       @click="toDesign"
       style="cursor: pointer"
     >
-      <img :src="data.src" />
+      <v-img lazy-src="../assets/photo.jpg" :src="data.src"
+        ><template v-slot:placeholder>
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row> </template
+      ></v-img>
       <p class="name-class">{{ data.name }}</p>
       <p class="teacher-class">
         {{ "任课教师：" + data.str1 + " " + data.str2 }}
@@ -48,7 +56,7 @@ export default {
   -moz-opacity: 0.8;
   opacity: 0.8;
 }
-.design-class img {
+.design-class .v-image {
   width: 100%;
   height: 140px;
 }

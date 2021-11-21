@@ -5,7 +5,15 @@
       @click="toCard"
       style="cursor: pointer"
     >
-      <img :src="data.src" />
+      <v-img lazy-src="../assets/photo.jpg" :src="data.src"
+        ><template v-slot:placeholder>
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row> </template
+      ></v-img>
       <p class="title-class">{{ data.title }}</p>
       <p class="date-class">{{ data.date }}</p>
     </div>
@@ -93,7 +101,7 @@ export default {
   -moz-opacity: 0.8;
   opacity: 0.8;
 }
-.card-class img {
+.card-class .v-image {
   width: 100%;
   height: 140px;
 }

@@ -550,6 +550,7 @@ export default {
   }
   .t1-content-class p {
     font-size: 11px;
+    line-height: 21px;
   }
   .photos-class {
     flex-wrap: wrap;

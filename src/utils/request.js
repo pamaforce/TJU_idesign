@@ -1,5 +1,5 @@
 import axios from 'axios';
 const service = axios.create({
-    baseURL: 'http://idesign.tju.edu.cn',
+    baseURL: '.',
 })
 export default service;

@@ -18,6 +18,16 @@
     <p class="title-class">最新动态</p>
     <div class="content-class">
       <div class="items-class">
+        <template v-if="newsList.length === 0">
+          <v-skeleton-loader
+            v-for="(item, i) in 9"
+            :key="'a' + i"
+            class="ma-0 my-4"
+            height="290px"
+            width="338px"
+            type="image,heading,list-item-two-line"
+          ></v-skeleton-loader
+        ></template>
         <my-news
           v-for="(item, i) in newsList"
           :key="i"
@@ -26,6 +36,16 @@
           :list="idList"
           from="/"
         />
+        <template v-if="newsLoading">
+          <v-skeleton-loader
+            v-for="(item, i) in 6"
+            :key="'b' + i"
+            class="ma-0 my-4"
+            height="290px"
+            width="338px"
+            type="image,heading,list-item-two-line"
+          ></v-skeleton-loader
+        ></template>
       </div>
       <v-btn class="btn-class" outlined @click="getMore">
         More
@@ -47,6 +67,7 @@ export default {
     idList: [],
     slides: [],
     newsList: [],
+    newsLoading: false,
     currentLine: 3,
     trans: {
       26: "lecture",
@@ -92,10 +113,12 @@ export default {
     getMore() {
       if (JSON.stringify(this.newsList[this.newsList.length - 1]) != "{}") {
         this.currentLine++;
+        this.newsLoading = true;
         this.addList(3, this.currentLine).then(() => {
           this.currentLine++;
           this.addList(3, this.currentLine).then(() => {
             while (this.newsList.length % 3) this.newsList.push({});
+            this.newsLoading = false;
           });
         });
       }

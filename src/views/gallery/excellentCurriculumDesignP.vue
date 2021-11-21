@@ -8,7 +8,22 @@
       <p class="desc-class">
         {{ detailData.desc }}
       </p>
-      <div class="excellentCurriculumDesignP-class">
+      <div class="excellentCurriculumDesignP-class"><template
+          v-if="
+            detailList.length === 0 ||
+            detailList[current_page_1] === undefined ||
+            detailList[current_page_1].length === 0
+          "
+        >
+          <v-skeleton-loader
+            v-for="(item, i) in 6"
+            :key="i"
+            class="ma-0 my-4"
+            height="210px"
+            width="250px"
+            type="image,heading,list-item-two-line"
+          ></v-skeleton-loader
+        ></template>
         <my-detail
           v-for="(item, i) in detailList[current_page_1]"
           :key="i"
@@ -122,6 +137,7 @@ export default {
               title: data.data.data[i].post_title,
               src: "upload/" + data.data.data[i].more.thumbnail,
               authors: y,
+              term: "202122-1 学期",
               id: data.data.data[i].id,
               category_id: this.detailData.id,
             });

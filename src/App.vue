@@ -48,4 +48,19 @@ export default {
   -moz-user-select: none;
   user-select: none;
 }
+.v-skeleton-loader__image {
+  height: 110px !important;
+  border-radius: 6px !important;
+  margin-bottom: 15px !important;
+}
+.v-skeleton-loader__list-item-two-line,
+.v-skeleton-loader__list-item {
+  padding: 0 !important;
+  height: 56px !important;
+}
+.items-class .v-skeleton-loader__image {
+  height: 190px !important;
+  border-radius: 6px !important;
+  margin-bottom: 15px !important;
+}
 </style>

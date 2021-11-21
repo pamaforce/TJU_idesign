@@ -8,11 +8,22 @@
       @click="toDetail"
       style="cursor: pointer"
     >
-      <img :src="data.src" />
+      <v-img lazy-src="../assets/photo.jpg" :src="data.src"
+        ><template v-slot:placeholder>
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row> </template
+      ></v-img>
       <p class="title-class">{{ data.title }}</p>
-      <p class="author-class" v-for="(item, i) in data.authors" :key="i">
-        {{ item }}
-      </p>
+      <div class="block-class">
+        <p class="author-class" v-for="(item, i) in data.authors" :key="i">
+          {{ item }}
+        </p>
+      </div>
+      <p class="term-class">{{ data.term }}</p>
     </div>
   </div>
 </template>
@@ -43,7 +54,6 @@ export default {
 <style scoped>
 .detail-class {
   width: 250px;
-  height: 190px;
   /* background-color: blueviolet; */
   margin: 15px 0;
   position: relative;
@@ -53,7 +63,7 @@ export default {
   -moz-opacity: 0.8;
   opacity: 0.8;
 }
-.detail-class img {
+.detail-class .v-image {
   width: 100%;
   height: 140px;
 }
@@ -65,10 +75,19 @@ export default {
 }
 .author-class {
   margin-right: 3px;
-  float: left;
   margin-bottom: 0;
   font-size: 12px;
   color: #6c6c6c;
+}
+.term-class {
+  margin-bottom: 0;
+  font-size: 12px;
+  color: #6c6c6c;
+}
+.block-class {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 @media screen and (max-width: 768px) {
   .detail-class {

@@ -8,7 +8,15 @@
       :class="[data.url == '' ? '' : 'hover-class']"
       @click="toTeacher"
     >
-      <img :src="data.avatar" />
+      <v-img lazy-src="../assets/photo.jpg" :src="data.avatar"
+        ><template v-slot:placeholder>
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row> </template
+      ></v-img>
       <p class="name-class">{{ data.name }}</p>
       <p class="desc-class">{{ data.desc }}</p>
       <p class="desc-class">{{ data.email == "" ? "暂无邮箱" : data.email }}</p>
@@ -42,7 +50,7 @@ export default {
   margin: 10px 0;
   /* background-color: aqua; */
 }
-.teacher-class img {
+.teacher-class .v-image {
   width: 100%;
   height: 182px;
 }

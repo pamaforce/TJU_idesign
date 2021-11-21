@@ -3,6 +3,22 @@
     <my-breadcrumbs title="全英文课程" />
     <p style="text-align: center; margin: 20px" v-if="isNull">暂无数据</p>
     <div class="EnglishCourse-class">
+      <template
+        v-if="
+          cardList.length === 0 ||
+          cardList[current_page] === undefined ||
+          cardList[current_page].length === 0
+        "
+      >
+        <v-skeleton-loader
+          v-for="(item, i) in 12"
+          :key="'a' + i"
+          class="ma-0 my-4"
+          height="225px"
+          width="250px"
+          type="image,heading,list-item"
+        ></v-skeleton-loader
+      ></template>
       <my-card
         v-for="(item, i) in cardList[current_page]"
         :key="i"

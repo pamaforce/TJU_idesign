@@ -15,8 +15,12 @@
       <p>设计名校</p>
       <div class="a-class">
         <a href="https://www.tudelft.nl/" target="_blank">Tudelft</a>
-        <a href="https://www.bauhaus.eu/" target="_blank">Bauhaus</a>
-        <a href="https://www.bauhaus.eu/" target="_blank">D-School</a>
+        <a
+          href="https://www.uni-weimar.de/de/universitaet/start/"
+          target="_blank"
+          >Bauhaus</a
+        >
+        <a href="https://dschool.stanford.edu/" target="_blank">D-School</a>
         <a href="http://tjdi.tongji.edu.cn/" target="_blank"
           >同济大学设计创意学院</a
         >

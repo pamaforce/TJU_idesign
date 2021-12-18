@@ -63,4 +63,7 @@ export default {
   border-radius: 6px !important;
   margin-bottom: 15px !important;
 }
+.v-image__placeholder {
+  display: none;
+}
 </style>

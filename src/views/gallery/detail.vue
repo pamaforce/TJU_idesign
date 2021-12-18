@@ -414,7 +414,7 @@ export default {
 }
 .offset-2-class {
   padding: 12px;
-  margin-left: 15.5px;
+  margin-left: 12px;
 }
 .intro-class p {
   padding-left: 20px;
@@ -536,14 +536,14 @@ export default {
     text-align: left;
   }
   .offset-1-class {
-    margin-left: 18.5px;
+    margin-left: 21px;
   }
   .offset-2-class {
-    margin-left: 33px;
+    margin-left: 32px;
   }
   .offset-3-class {
     padding: 12px;
-    margin-left: 14.5px;
+    margin-left: 16px;
   }
   .t1-label-class p {
     font-size: 14px;

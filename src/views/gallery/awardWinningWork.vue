@@ -5,9 +5,10 @@
     <div class="awardWinningWork-class">
       <template
         v-if="
-          detailList.length === 0 ||
-          detailList[current_page] === undefined ||
-          detailList[current_page].length === 0
+          !isNull &&
+          (detailList.length === 0 ||
+            detailList[current_page] === undefined ||
+            detailList[current_page].length === 0)
         "
       >
         <v-skeleton-loader

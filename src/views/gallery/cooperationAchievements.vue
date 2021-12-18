@@ -8,14 +8,19 @@
       <p class="desc-class">
         {{ detailData.desc }}
       </p>
-      <div class="cooperationAchievements-class">
-        <template
-          v-if="
-            detailList.length === 0 ||
+      <p
+        style="text-align: center; margin: 20px"
+        v-if="
+          !loadingStatue &&
+          (detailList.length === 0 ||
             detailList[current_page_1] === undefined ||
-            detailList[current_page_1].length === 0
-          "
-        >
+            detailList[current_page_1].length === 0)
+        "
+      >
+        暂无数据
+      </p>
+      <div class="cooperationAchievements-class">
+        <template v-if="loadingStatue">
           <v-skeleton-loader
             v-for="(item, i) in 6"
             :key="i"
@@ -79,6 +84,7 @@ export default {
     myPaging,
   },
   data: () => ({
+    loadingStatue: true,
     statue: false,
     current_page: 0,
     last_page: 1,
@@ -154,6 +160,7 @@ export default {
             else flag = false;
           }
         }
+        this.loadingStatue = false;
         this.current_page_1 = c;
         this.last_page_1 = data.data.last_page;
       });

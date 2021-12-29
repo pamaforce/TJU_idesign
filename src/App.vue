@@ -7,6 +7,17 @@
 </template>
 
 <script>
+if (window) {
+  const { aplus_queue } = window;
+  aplus_queue.push({
+    action: "aplus.sendPV",
+    arguments: [
+      {
+        is_auto: false,
+      },
+    ],
+  });
+}
 import myFooter from "./components/footer.vue";
 import myNavigation from "./components/navigation.vue";
 

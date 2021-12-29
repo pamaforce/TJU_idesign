@@ -72,6 +72,7 @@
     </div>
     <keep-alive>
       <router-view
+        ref="childView"
         :class="[isDetail ? 'detail-router-class' : 'router-class']"
       />
     </keep-alive>
@@ -88,6 +89,7 @@ export default {
   methods: {
     to(i) {
       if (i != this.$route.name) this.$router.push({ name: i });
+      this.$refs.childView.statue = false;
     },
     changeStatue() {
       this.statue = !this.statue;

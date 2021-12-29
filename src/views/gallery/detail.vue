@@ -564,7 +564,6 @@ export default {
     width: calc(100vw - 30px);
     height: calc(177.78vw - 53.33px);
     margin: 5px 0;
-    order: -1;
   }
   .main-video-class {
     width: 100vw;

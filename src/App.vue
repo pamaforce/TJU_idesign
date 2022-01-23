@@ -77,4 +77,8 @@ export default {
 .v-image__placeholder {
   display: none;
 }
+.video-js {
+  width: 100%;
+  height: inherit;
+}
 </style>

@@ -7,7 +7,7 @@
     <p class="title-class">{{ data.post_title }}</p>
     <p class="title-en-class">{{ data.post_title_en }}</p>
     <v-row no-gutters style="margin-bottom: 30px">
-      <v-col lg="8" md="9" sm="12">
+      <v-col lg="9" md="9" sm="12">
         <v-row>
           <v-col lg="6" md="4" sm="12">
             <div class="t1-class offset-1-class">
@@ -57,7 +57,7 @@
           </div>
         </v-row>
       </v-col>
-      <v-col lg="4" md="3" sm="12" class="right-class">
+      <v-col lg="3" md="3" sm="12" class="right-class">
         <div style="display: inline-block">
           <div class="t1-class offset-3-class">
             <div class="t1-label-class">

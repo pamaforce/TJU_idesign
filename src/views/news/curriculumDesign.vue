@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-breadcrumbs title="学习" subTitle="课设" />
+    <my-breadcrumbs title="学习" subTitle="课程答辩" />
     <p style="text-align: center; margin: 20px" v-if="isNull">暂无数据</p>
     <div class="curriculumDesign-class">
       <template

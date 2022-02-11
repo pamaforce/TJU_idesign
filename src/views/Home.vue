@@ -1,18 +1,21 @@
 <template>
-  <div style="text-align: center; padding-top: 69px">
+  <div style="text-align: center">
+    <div style="height: 70px"></div>
     <v-carousel cycle height="300" interval="100000" hide-delimiter-background>
       <v-carousel-item v-for="(slide, i) in slides" :key="i">
-        <v-sheet height="100%">
-          <v-row class="fill-height" align="center" justify="center">
+        <div class="fill-height">
+          <div class="img-back" @click="toUrl(slide.url)">
             <img
               :src="slide.src"
-              style="height: 300px"
+              style="min-height: 300px; height: 300px; vertical-align: bottom"
               :alt="slide.title"
               :class="[slide.url == '' ? '' : 'hover-class']"
-              @click="toUrl(slide.url)"
             />
-          </v-row>
-        </v-sheet>
+            <div class="text-back">
+              <p>{{ slide.title }}</p>
+            </div>
+          </div>
+        </div>
       </v-carousel-item>
     </v-carousel>
     <p class="title-class">最新动态</p>
@@ -124,7 +127,7 @@ export default {
       }
     },
     toUrl(url) {
-      if (url != "") window.open(url, "_blank");
+      if (url != "") window.open(url.replace(/amp;/g, ""), "_self");
     },
   },
   created: function () {
@@ -144,6 +147,40 @@ export default {
 };
 </script>
 <style scoped>
+.img-back {
+  position: relative;
+  display: inline-block;
+  height: 300px;
+}
+.text-back {
+  position: relative;
+  bottom: 70px;
+  left: 0;
+  background-image: linear-gradient(
+    #00000000 0%,
+    #00000010 10%,
+    #000000cc 100%
+  );
+  width: 100%;
+  height: 70px;
+  color: white;
+  text-align: left;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 25px;
+  font-size: 20px;
+}
+.text-back p {
+  display: inline-block;
+  max-width: 800px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text-back p:hover {
+  border-bottom: 1px solid white;
+}
 .hover-class {
   cursor: pointer;
 }
@@ -186,10 +223,21 @@ export default {
     font-size: 22px;
     padding-top: 8px;
   }
+  .text-back p {
+    max-width: 550px;
+  }
 }
 @media screen and (max-width: 768px) {
   .content-class {
     padding: 0 15px;
+  }
+  .text-back {
+    width: 100vw;
+    text-align: center;
+    padding-top: 0;
+  }
+  .text-back p {
+    max-width: 80vw;
   }
 }
 </style>
@@ -223,6 +271,11 @@ export default {
   opacity: 0;
 }
 .v-carousel__controls {
+  width: auto !important;
+  position: absolute !important;
+  left: unset !important;
+  right: 50% !important;
+  transform: translateX(525px) !important;
   bottom: 5px !important;
 }
 .theme--dark.v-icon:focus::after {
@@ -233,5 +286,18 @@ export default {
 }
 .theme--dark.v-btn:focus::before {
   opacity: 0 !important;
+}
+@media screen and (max-width: 1264px) {
+  .v-carousel__controls {
+    right: 40px !important;
+    transform: translateX(0) !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .v-carousel__controls {
+    right: 50% !important;
+    transform: translateX(50%) !important;
+    bottom: 0 !important;
+  }
 }
 </style>

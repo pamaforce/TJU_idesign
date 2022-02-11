@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-breadcrumbs title="讲座" />
+    <my-breadcrumbs title="讲座" subTitle="学术类" />
     <p style="text-align: center; margin: 20px" v-if="isNull">暂无数据</p>
     <div class="lecture-class">
       <template
@@ -25,7 +25,7 @@
         :data="item"
         :current="i"
         :list="idList[current_page]"
-        :from="'lecture_' + current_page"
+        :from="'lecture1_' + current_page"
       />
       <my-paging
         v-if="!isNull"
@@ -42,7 +42,7 @@ import myCard from "../../components/card.vue";
 import myBreadcrumbs from "../../components/breadcrumbs.vue";
 import service from "../../utils/request.js";
 export default {
-  name: "lecture",
+  name: "lecture1",
   props: {
     page: String,
   },
@@ -63,7 +63,7 @@ export default {
       service(
         "/portal/api_v1/get_new_lists?per_page=12&current_page=" +
           c +
-          "&category_id=26"
+          "&category_id=85"
       ).then((data) => {
         let flag = true;
         this.cardList[c] = [];

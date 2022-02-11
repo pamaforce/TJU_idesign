@@ -35,6 +35,7 @@ export default {
   }),
   methods: {
     toDesign() {
+      window.scrollTo(0, 0);
       this.$emit("todesign", this.data);
     },
   },

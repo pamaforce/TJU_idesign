@@ -144,7 +144,7 @@ export default {
               title: data.data.data[i].post_title,
               src: "upload/" + data.data.data[i].more.thumbnail,
               authors: y,
-              term: "202122-1 学期",
+              term: data.data.data[i].post_term,
               id: data.data.data[i].id,
               category_id: this.detailData.id,
             });

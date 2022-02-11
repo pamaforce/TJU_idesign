@@ -45,12 +45,13 @@
         >
           创新创业
         </p>
-        <div style="position: relative" @click="changeSubStatue(1)">
+        <div style="position: relative">
           <p
             :style="
               this.$route.name == 'l' ? 'font-weight:600;color:#4e4e4e' : ''
             "
             class="h-class subH-class"
+            @click="changeSubStatue(2)"
           >
             校友风采
           </p>
@@ -101,7 +102,7 @@ export default {
       this.statue = !this.statue;
     },
     changeSubStatue(item) {
-      if (item == 0 || !this.subStatue) {
+      if (!this.subStatue || item === 0) {
         service("/portal/api_v1/get_xiaoyou_grades").then((data) => {
           this.list = [];
           for (let i = 0; i < data.data.length; i++) {
@@ -112,6 +113,8 @@ export default {
             this.subStatue = true;
           } else this.subStatue = !this.subStatue;
         });
+      } else if (this.subStatue && item === 2) {
+        this.subStatue = false;
       }
     },
   },

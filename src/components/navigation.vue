@@ -40,7 +40,7 @@
           <div class="line-class line-1-class"></div>
           <div class="col-class">
             <p>新闻动态</p>
-            <router-link to="/news/lecture" style="margin-right: 80px"
+            <router-link to="/news/lecture1" style="margin-right: 80px"
               >讲座</router-link
             >
             <router-link to="/news/exhibition" style="margin-right: 80px"

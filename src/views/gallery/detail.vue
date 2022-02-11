@@ -387,7 +387,7 @@ export default {
 }
 .authors-class {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   flex-wrap: wrap;
 }
 .author-class {

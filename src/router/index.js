@@ -20,7 +20,8 @@ import curriculum from '../views/news/curriculum.vue'
 import curriculumDesign from '../views/news/curriculumDesign.vue'
 import exhibition from '../views/news/exhibition.vue'
 import graduationProject from '../views/news/graduationProject.vue'
-import lecture from '../views/news/lecture.vue'
+import lecture1 from '../views/news/lecture1.vue'
+import lecture2 from '../views/news/lecture2.vue'
 import meeting from '../views/news/meeting.vue'
 import success from '../views/news/success.vue'
 import workshop from '../views/news/workshop.vue'
@@ -203,9 +204,15 @@ const routes = [{
                 props: route => ({ page: route.query.page })
             },
             {
-                path: 'lecture',
-                component: lecture,
-                name: 'z1',
+                path: 'lecture1',
+                component: lecture1,
+                name: 'z11',
+                props: route => ({ page: route.query.page })
+            },
+            {
+                path: 'lecture2',
+                component: lecture2,
+                name: 'z12',
                 props: route => ({ page: route.query.page })
             },
             {

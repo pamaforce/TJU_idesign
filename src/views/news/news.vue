@@ -103,16 +103,40 @@
             工作坊
           </p>
         </div>
-        <p
-          :style="
-            $route.name == 'z7' || $route.params.category_id == 29
-              ? 'font-weight:600;color:#4e4e4e'
-              : ''
-          "
-          @click="to('z7')"
+        <div style="position: relative" @click="changeSubStatue_2">
+          <p
+            :style="
+              $route.name > 'z70' && $route.name < 'z73'
+                ? 'font-weight:600;color:#4e4e4e'
+                : ''
+            "
+            class="h-class subH-class"
+          >
+            会议
+          </p>
+          <v-icon
+            :class="[subStatue_2 ? '' : 'rotated']"
+            style="position: absolute; right: 0; top: 0"
+            >mdi-chevron-down</v-icon
+          >
+        </div>
+        <div
+          class="h-class subH-item-class"
+          :style="subStatue_2 ? 'max-height: 400px' : 'max-height: 0'"
         >
-          会议
-        </p>
+          <p
+            :style="$route.name == 'z71' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z71')"
+          >
+            专业研讨
+          </p>
+          <p
+            :style="$route.name == 'z72' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z72')"
+          >
+            交流分享
+          </p>
+        </div>
         <p
           :style="
             $route.name == 'z8' || $route.params.category_id == 30
@@ -145,6 +169,7 @@ export default {
     statue: true,
     subStatue: false,
     subStatue_1: false,
+    subStatue_2: false,
   }),
   methods: {
     to(i) {
@@ -159,23 +184,28 @@ export default {
     changeSubStatue_1() {
       this.subStatue_1 = !this.subStatue_1;
     },
+    changeSubStatue_2() {
+      this.subStatue_2 = !this.subStatue_2;
+    },
   },
   watch: {
     $route() {
       if (this.$route.name > "z2" && this.$route.name < "z7") {
         this.subStatue = true;
-      }
-      if (this.$route.name > "z10" && this.$route.name < "z13") {
+      } else if (this.$route.name > "z10" && this.$route.name < "z13") {
         this.subStatue_1 = true;
+      } else if (this.$route.name > "z70" && this.$route.name < "z73") {
+        this.subStatue_2 = true;
       }
     },
   },
   created: function () {
     if (this.$route.name > "z2" && this.$route.name < "z7") {
       this.subStatue = true;
-    }
-    if (this.$route.name > "z10" && this.$route.name < "z13") {
+    } else if (this.$route.name > "z10" && this.$route.name < "z13") {
       this.subStatue_1 = true;
+    } else if (this.$route.name > "z70" && this.$route.name < "z73") {
+      this.subStatue_2 = true;
     }
   },
 };

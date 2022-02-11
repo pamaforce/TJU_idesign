@@ -49,7 +49,7 @@
             <router-link to="/news/curriculum" style="margin-right: 80px"
               >学习</router-link
             >
-            <router-link to="/news/meeting" style="margin-right: 80px"
+            <router-link to="/news/meeting1" style="margin-right: 80px"
               >会议</router-link
             >
             <router-link to="/news/activity" style="margin-right: 80px"

@@ -22,7 +22,8 @@ import exhibition from '../views/news/exhibition.vue'
 import graduationProject from '../views/news/graduationProject.vue'
 import lecture1 from '../views/news/lecture1.vue'
 import lecture2 from '../views/news/lecture2.vue'
-import meeting from '../views/news/meeting.vue'
+import meeting1 from '../views/news/meeting1.vue'
+import meeting2 from '../views/news/meeting2.vue'
 import success from '../views/news/success.vue'
 import workshop from '../views/news/workshop.vue'
 import education from '../views/education/education.vue'
@@ -216,9 +217,15 @@ const routes = [{
                 props: route => ({ page: route.query.page })
             },
             {
-                path: 'meeting',
-                component: meeting,
-                name: 'z7',
+                path: 'meeting1',
+                component: meeting1,
+                name: 'z71',
+                props: route => ({ page: route.query.page })
+            },
+            {
+                path: 'meeting2',
+                component: meeting2,
+                name: 'z72',
                 props: route => ({ page: route.query.page })
             },
             {

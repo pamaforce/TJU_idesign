@@ -1,15 +1,14 @@
 <template>
   <div style="text-align: center">
     <div style="height: 70px"></div>
-    <v-carousel cycle height="300" interval="100000" hide-delimiter-background>
+    <v-carousel cycle height="auto" interval="100000" hide-delimiter-background>
       <v-carousel-item v-for="(slide, i) in slides" :key="i">
         <div class="fill-height">
           <div class="img-back" @click="toUrl(slide.url)">
             <img
               :src="slide.src"
-              style="min-height: 300px; height: 300px; vertical-align: bottom"
               :alt="slide.title"
-              :class="[slide.url == '' ? '' : 'hover-class']"
+              :class="'img-class' + (slide.url == '' ? '' : ' hover-class')"
             />
             <div class="text-back">
               <p>{{ slide.title }}</p>
@@ -151,6 +150,14 @@ export default {
   position: relative;
   display: inline-block;
   height: 300px;
+}
+.fill-height {
+  max-height: 300px;
+}
+.img-class {
+  min-height: 300px;
+  height: 300px;
+  vertical-align: bottom;
 }
 .text-back {
   position: relative;

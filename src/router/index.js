@@ -15,8 +15,11 @@ import news from '../views/news/news.vue'
 import theNews_1 from '../views/news/theNews_1.vue'
 import theNews_2 from '../views/education/theNews_2.vue'
 import theNews_3 from '../views/internationalExchange/theNews_3.vue'
-import activity from '../views/news/activity.vue'
+import activity1 from '../views/news/activity1.vue'
+import activity2 from '../views/news/activity2.vue'
+import activity3 from '../views/news/activity3.vue'
 import curriculum from '../views/news/curriculum.vue'
+import practice from '../views/news/practice.vue'
 import curriculumDesign from '../views/news/curriculumDesign.vue'
 import exhibition from '../views/news/exhibition.vue'
 import graduationProject from '../views/news/graduationProject.vue'
@@ -24,6 +27,7 @@ import lecture1 from '../views/news/lecture1.vue'
 import lecture2 from '../views/news/lecture2.vue'
 import meeting1 from '../views/news/meeting1.vue'
 import meeting2 from '../views/news/meeting2.vue'
+import meeting3 from '../views/news/meeting3.vue'
 import success from '../views/news/success.vue'
 import workshop from '../views/news/workshop.vue'
 import education from '../views/education/education.vue'
@@ -175,21 +179,31 @@ const routes = [{
         path: '/news',
         component: news,
         children: [{
-                path: 'activity',
-                component: activity,
-                name: 'z8',
+                path: 'activity1',
+                component: activity1,
+                name: 'z81',
+                props: route => ({ page: route.query.page })
+            }, {
+                path: 'activity2',
+                component: activity2,
+                name: 'z82',
+                props: route => ({ page: route.query.page })
+            }, {
+                path: 'activity3',
+                component: activity3,
+                name: 'z83',
                 props: route => ({ page: route.query.page })
             },
             {
                 path: 'curriculum',
                 component: curriculum,
-                name: 'z3',
+                name: 'z31',
                 props: route => ({ page: route.query.page })
             },
             {
                 path: 'curriculumDesign',
                 component: curriculumDesign,
-                name: 'z4',
+                name: 'z32',
                 props: route => ({ page: route.query.page })
             },
             {
@@ -201,7 +215,7 @@ const routes = [{
             {
                 path: 'graduationProject',
                 component: graduationProject,
-                name: 'z5',
+                name: 'z33',
                 props: route => ({ page: route.query.page })
             },
             {
@@ -229,6 +243,12 @@ const routes = [{
                 props: route => ({ page: route.query.page })
             },
             {
+                path: 'meeting3',
+                component: meeting3,
+                name: 'z73',
+                props: route => ({ page: route.query.page })
+            },
+            {
                 path: 'success',
                 component: success,
                 name: 'z9',
@@ -237,7 +257,13 @@ const routes = [{
             {
                 path: 'workshop',
                 component: workshop,
-                name: 'z6',
+                name: 'z34',
+                props: route => ({ page: route.query.page })
+            },
+            {
+                path: 'practice',
+                component: practice,
+                name: 'z35',
                 props: route => ({ page: route.query.page })
             },
             {

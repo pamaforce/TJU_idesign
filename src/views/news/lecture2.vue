@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-breadcrumbs title="讲座" subTitle="讲座类" />
+    <my-breadcrumbs title="讲座" subTitle="思政教育" />
     <p style="text-align: center; margin: 20px" v-if="isNull">暂无数据</p>
     <div class="lecture-class">
       <template

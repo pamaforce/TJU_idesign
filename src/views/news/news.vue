@@ -11,7 +11,7 @@
       </div>
       <div
         class="h-class h-item-class"
-        :style="statue ? 'max-height: 600px' : 'max-height: 0'"
+        :style="statue ? 'max-height: 800px' : 'max-height: 0'"
       >
         <div style="position: relative" @click="changeSubStatue_1">
           <p
@@ -38,13 +38,13 @@
             :style="$route.name == 'z11' ? 'font-weight:600;color:#4e4e4e' : ''"
             @click="to('z11')"
           >
-            学术类
+            学术研究
           </p>
           <p
             :style="$route.name == 'z12' ? 'font-weight:600;color:#4e4e4e' : ''"
             @click="to('z12')"
           >
-            教育类
+            思政教育
           </p>
         </div>
         <p
@@ -60,7 +60,7 @@
         <div style="position: relative" @click="changeSubStatue">
           <p
             :style="
-              $route.name > 'z2' && $route.name < 'z7'
+              $route.name > 'z30' && $route.name < 'z36'
                 ? 'font-weight:600;color:#4e4e4e'
                 : ''
             "
@@ -79,34 +79,40 @@
           :style="subStatue ? 'max-height: 400px' : 'max-height: 0'"
         >
           <p
-            :style="$route.name == 'z3' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('z3')"
+            :style="$route.name == 'z31' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z31')"
           >
             课程思政
           </p>
           <p
-            :style="$route.name == 'z4' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('z4')"
+            :style="$route.name == 'z32' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z32')"
           >
             课程答辩
           </p>
           <p
-            :style="$route.name == 'z5' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('z5')"
+            :style="$route.name == 'z33' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z33')"
           >
             毕业设计
           </p>
           <p
-            :style="$route.name == 'z6' ? 'font-weight:600;color:#4e4e4e' : ''"
-            @click="to('z6')"
+            :style="$route.name == 'z34' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z34')"
           >
             工作坊
+          </p>
+          <p
+            :style="$route.name == 'z35' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z35')"
+          >
+            专业实践
           </p>
         </div>
         <div style="position: relative" @click="changeSubStatue_2">
           <p
             :style="
-              $route.name > 'z70' && $route.name < 'z73'
+              $route.name > 'z70' && $route.name < 'z74'
                 ? 'font-weight:600;color:#4e4e4e'
                 : ''
             "
@@ -136,17 +142,53 @@
           >
             交流分享
           </p>
+          <p
+            :style="$route.name == 'z73' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z73')"
+          >
+            校企合作
+          </p>
         </div>
-        <p
-          :style="
-            $route.name == 'z8' || $route.params.category_id == 30
-              ? 'font-weight:600;color:#4e4e4e'
-              : ''
-          "
-          @click="to('z8')"
+        <div style="position: relative" @click="changeSubStatue_3">
+          <p
+            :style="
+              $route.name > 'z80' && $route.name < 'z84'
+                ? 'font-weight:600;color:#4e4e4e'
+                : ''
+            "
+            class="h-class subH-class"
+          >
+            活动
+          </p>
+          <v-icon
+            :class="[subStatue_3 ? '' : 'rotated']"
+            style="position: absolute; right: 0; top: 0"
+            >mdi-chevron-down</v-icon
+          >
+        </div>
+        <div
+          class="h-class subH-item-class"
+          :style="subStatue_3 ? 'max-height: 400px' : 'max-height: 0'"
         >
-          活动
-        </p>
+          <p
+            :style="$route.name == 'z81' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z81')"
+          >
+            公益
+          </p>
+          <p
+            :style="$route.name == 'z82' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z82')"
+          >
+            赛事
+          </p>
+          <p
+            :style="$route.name == 'z83' ? 'font-weight:600;color:#4e4e4e' : ''"
+            @click="to('z83')"
+          >
+            文娱
+          </p>
+        </div>
         <p
           :style="
             $route.name == 'z9' || $route.params.category_id == 31
@@ -170,6 +212,7 @@ export default {
     subStatue: false,
     subStatue_1: false,
     subStatue_2: false,
+    subStatue_3: false,
   }),
   methods: {
     to(i) {
@@ -187,25 +230,32 @@ export default {
     changeSubStatue_2() {
       this.subStatue_2 = !this.subStatue_2;
     },
+    changeSubStatue_3() {
+      this.subStatue_3 = !this.subStatue_3;
+    },
   },
   watch: {
     $route() {
-      if (this.$route.name > "z2" && this.$route.name < "z7") {
+      if (this.$route.name > "z30" && this.$route.name < "z36") {
         this.subStatue = true;
       } else if (this.$route.name > "z10" && this.$route.name < "z13") {
         this.subStatue_1 = true;
-      } else if (this.$route.name > "z70" && this.$route.name < "z73") {
+      } else if (this.$route.name > "z70" && this.$route.name < "z74") {
         this.subStatue_2 = true;
+      } else if (this.$route.name > "z80" && this.$route.name < "z84") {
+        this.subStatue_3 = true;
       }
     },
   },
   created: function () {
-    if (this.$route.name > "z2" && this.$route.name < "z7") {
+    if (this.$route.name > "z30" && this.$route.name < "z36") {
       this.subStatue = true;
     } else if (this.$route.name > "z10" && this.$route.name < "z13") {
       this.subStatue_1 = true;
-    } else if (this.$route.name > "z70" && this.$route.name < "z73") {
+    } else if (this.$route.name > "z70" && this.$route.name < "z74") {
       this.subStatue_2 = true;
+    } else if (this.$route.name > "z80" && this.$route.name < "z84") {
+      this.subStatue_3 = true;
     }
   },
 };

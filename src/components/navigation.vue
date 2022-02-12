@@ -52,7 +52,7 @@
             <router-link to="/news/meeting1" style="margin-right: 80px"
               >会议</router-link
             >
-            <router-link to="/news/activity" style="margin-right: 80px"
+            <router-link to="/news/activity1" style="margin-right: 80px"
               >活动</router-link
             >
             <router-link to="/news/success" style="margin-right: 80px"
@@ -177,7 +177,27 @@
             class="h-class h-item-class"
             :style="this.statue == 1 ? 'max-height: 400px' : 'max-height: 0'"
           >
-            <router-link to="/news/lecture">讲座</router-link>
+            <div class="h-class subH-class" @click="changeSubStatue_3">
+              <p>讲座</p>
+              <v-icon
+                :class="[this.subStatue_3 ? '' : 'rotated']"
+                style="
+                  position: absolute;
+                  right: 0;
+                  top: 5px;
+                  color: white;
+                  font-weight: 400;
+                "
+                >mdi-chevron-down</v-icon
+              >
+            </div>
+            <div
+              class="h-class subH-item-class"
+              :style="this.subStatue_3 ? 'max-height: 300px' : 'max-height: 0'"
+            >
+              <router-link to="/news/lecture1">学术研究</router-link>
+              <router-link to="/news/lecture2">思政教育</router-link>
+            </div>
             <router-link to="/news/exhibition">展览</router-link>
             <div class="h-class subH-class" @click="changeSubStatue_2">
               <p>学习</p>
@@ -197,13 +217,56 @@
               class="h-class subH-item-class"
               :style="this.subStatue_2 ? 'max-height: 300px' : 'max-height: 0'"
             >
-              <router-link to="/news/curriculum">课程</router-link>
-              <router-link to="/news/curriculumDesign">课程设计</router-link
+              <router-link to="/news/curriculum">课程思政</router-link>
+              <router-link to="/news/curriculumDesign">课程答辩</router-link
               ><router-link to="/news/graduationProject">毕业设计</router-link
               ><router-link to="/news/workshop">工作坊</router-link>
+              <router-link to="/news/practice">专业实践</router-link>
             </div>
-            <router-link to="/news/meeting">会议</router-link>
-            <router-link to="/news/activity">活动</router-link>
+            <div class="h-class subH-class" @click="changeSubStatue_4">
+              <p>会议</p>
+              <v-icon
+                :class="[this.subStatue_4 ? '' : 'rotated']"
+                style="
+                  position: absolute;
+                  right: 0;
+                  top: 5px;
+                  color: white;
+                  font-weight: 400;
+                "
+                >mdi-chevron-down</v-icon
+              >
+            </div>
+            <div
+              class="h-class subH-item-class"
+              :style="this.subStatue_4 ? 'max-height: 300px' : 'max-height: 0'"
+            >
+              <router-link to="/news/meeting1">专业研讨</router-link>
+              <router-link to="/news/meeting2">交流分享</router-link
+              ><router-link to="/news/meeting3">校企合作</router-link>
+            </div>
+            <div class="h-class subH-class" @click="changeSubStatue_5">
+              <p>活动</p>
+              <v-icon
+                :class="[this.subStatue_5 ? '' : 'rotated']"
+                style="
+                  position: absolute;
+                  right: 0;
+                  top: 5px;
+                  color: white;
+                  font-weight: 400;
+                "
+                >mdi-chevron-down</v-icon
+              >
+            </div>
+            <div
+              class="h-class subH-item-class"
+              :style="this.subStatue_5 ? 'max-height: 300px' : 'max-height: 0'"
+            >
+              <router-link to="/news/activity1">公益</router-link>
+              <router-link to="/news/activity2">赛事</router-link
+              ><router-link to="/news/activity3">文娱</router-link>
+            </div>
             <router-link to="/news/success">捷报</router-link>
           </div>
           <div class="h-class" @click="changeStatue(2)">
@@ -336,6 +399,9 @@ export default {
     subStatue: false,
     subStatue_1: false,
     subStatue_2: false,
+    subStatue_3: false,
+    subStatue_4: false,
+    subStatue_5: false,
     yearList: [],
   }),
   methods: {
@@ -346,6 +412,7 @@ export default {
       }
     },
     changeStatue(index) {
+      this.closeAll();
       if (index == 2 && this.yearList.length == 0) {
         service("/portal/api_v1/get_xiaoyou_grades").then((data) => {
           this.yearList = [];
@@ -357,14 +424,38 @@ export default {
       } else if (this.statue != index) this.statue = index;
       else this.statue = -1;
     },
+    closeAll() {
+      this.subStatue =
+        this.subStatue_1 =
+        this.subStatue_2 =
+        this.subStatue_3 =
+        this.subStatue_4 =
+        this.subStatue_5 =
+          false;
+    },
     changeSubStatue() {
+      if (!this.subStatue) this.closeAll();
       this.subStatue = !this.subStatue;
     },
     changeSubStatue_1() {
+      if (!this.subStatue_1) this.closeAll();
       this.subStatue_1 = !this.subStatue_1;
     },
     changeSubStatue_2() {
+      if (!this.subStatue_2) this.closeAll();
       this.subStatue_2 = !this.subStatue_2;
+    },
+    changeSubStatue_3() {
+      if (!this.subStatue_3) this.closeAll();
+      this.subStatue_3 = !this.subStatue_3;
+    },
+    changeSubStatue_4() {
+      if (!this.subStatue_4) this.closeAll();
+      this.subStatue_4 = !this.subStatue_4;
+    },
+    changeSubStatue_5() {
+      if (!this.subStatue_5) this.closeAll();
+      this.subStatue_5 = !this.subStatue_5;
     },
   },
   watch: {

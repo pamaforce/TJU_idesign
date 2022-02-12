@@ -1,8 +1,8 @@
 <template>
   <div>
-    <my-breadcrumbs title="讲座" subTitle="学术研究" />
+    <my-breadcrumbs title="会议" subTitle="校企合作" />
     <p style="text-align: center; margin: 20px" v-if="isNull">暂无数据</p>
-    <div class="lecture-class">
+    <div class="meeting-class">
       <template
         v-if="
           cardList.length === 0 ||
@@ -25,7 +25,7 @@
         :data="item"
         :current="i"
         :list="idList[current_page]"
-        :from="'lecture1_' + current_page"
+        :from="'meeting3_' + current_page"
       />
       <my-paging
         v-if="!isNull"
@@ -42,7 +42,7 @@ import myCard from "../../components/card.vue";
 import myBreadcrumbs from "../../components/breadcrumbs.vue";
 import service from "../../utils/request.js";
 export default {
-  name: "lecture1",
+  name: "meeting3",
   props: {
     page: String,
   },
@@ -63,7 +63,7 @@ export default {
       service(
         "/portal/api_v1/get_new_lists?per_page=12&current_page=" +
           c +
-          "&category_id=85"
+          "&category_id=89"
       ).then((data) => {
         let flag = true;
         this.cardList[c] = [];
@@ -111,7 +111,7 @@ export default {
 };
 </script>
 <style scoped>
-.lecture-class {
+.meeting-class {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -119,7 +119,7 @@ export default {
   padding-top: 15px;
 }
 @media screen and (max-width: 768px) {
-  .lecture-class {
+  .meeting-class {
     justify-content: space-around;
   }
 }

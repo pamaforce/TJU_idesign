@@ -3,7 +3,7 @@
     <my-breadcrumbs title="联系我们" />
     <div v-html="html" style="margin-top: 20px" id="theNews"></div>
     <!-- <img
-      v-image-preview
+       
       src="../../assets/contactUs.jpg"
       style="width: 100%; margin: 30px 0"
     />

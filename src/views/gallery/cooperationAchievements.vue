@@ -36,7 +36,7 @@
           :data="item"
           :current="i"
           :list="idList"
-          from="/gallery/cooperationAchievements"
+          :from="'/gallery/cooperationAchievements/' + $route.params.id"
         />
         <my-paging
           :totalIndex="last_page_1"
@@ -56,12 +56,12 @@
           :data="item"
           @todesign="toDesign"
         />
-        <my-paging
+        <!-- <my-paging
           v-if="!isNull"
           :totalIndex="last_page"
           :currentIndex="current_page"
           @changeIndex="changeIndex"
-        />
+        /> -->
       </div>
     </template>
   </div>
@@ -76,6 +76,7 @@ export default {
   name: "cooperationAchievements",
   props: {
     page: String,
+    id: String,
   },
   components: {
     myBreadcrumbs,
@@ -101,7 +102,7 @@ export default {
       service(
         "/portal/api_v1/get_cates_by_bigtype?big_type=3&current_page=" +
           c +
-          "&per_page=12"
+          "&per_page=99999"
       ).then((data) => {
         let flag = true;
         this.designList[c] = [];
@@ -124,6 +125,9 @@ export default {
         this.current_page = c;
         this.last_page = data.data.last_page;
         this.isNull = this.designList[this.current_page].length == 0;
+        if (this.$route.params.id !== undefined) {
+          this.findItemAndGo(this.$route.params.id);
+        }
       });
     },
     fillDetailList(c) {
@@ -181,17 +185,45 @@ export default {
     },
     goBack() {
       this.statue = false;
+      this.$router.push(`/gallery/cooperationAchievements`);
     },
     toDesign(data) {
+      this.$router.push(`/gallery/cooperationAchievements/${data.id}`);
       this.detailData = data;
       this.current_page_1 = 0;
       this.last_page_1 = 1;
       this.fillDetailList(1);
       this.statue = true;
     },
+    findItemAndGo(id) {
+      let trueId = parseInt(id);
+      this.designList[1].map((item) => {
+        if (item.id === trueId) {
+          this.detailData = item;
+          this.current_page_1 = 0;
+          this.last_page_1 = 1;
+          this.fillDetailList(1);
+          this.statue = true;
+          return;
+        }
+      });
+    },
+  },
+  watch: {
+    $route() {
+      if (this.designList[1] === undefined) {
+        this.fillList(isNaN(parseInt(this.page)) ? 1 : parseInt(this.page));
+      } else if (this.$route.params.id !== undefined) {
+        this.findItemAndGo(this.$route.params.id);
+      }
+    },
   },
   created() {
-    this.fillList(isNaN(parseInt(this.page)) ? 1 : parseInt(this.page));
+    if (this.designList[1] === undefined) {
+      this.fillList(isNaN(parseInt(this.page)) ? 1 : parseInt(this.page));
+    } else if (this.$route.params.id !== undefined) {
+      this.findItemAndGo(this.$route.params.id);
+    }
   },
 };
 </script>

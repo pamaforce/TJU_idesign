@@ -16,7 +16,7 @@
       Management》（设计管理）课程。学生在学习过程中不断深入设计方法，启发了大家在此学习阶段的思路。
     </p>
     <img
-      v-image-preview
+       
       src="../../assets/postgraduate.png"
       style="width: 100%"
     /> -->

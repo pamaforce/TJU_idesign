@@ -148,22 +148,22 @@ const routes = [{
                 name: 't'
             },
             {
-                path: 'cooperationAchievements',
+                path: 'cooperationAchievements/:id?',
                 component: cooperationAchievements,
                 name: 's'
             },
             {
-                path: 'excellentCurriculumDesignU',
+                path: 'excellentCurriculumDesignU/:id?',
                 component: excellentCurriculumDesignU,
-                name: 'p'
+                name: 'p',
             },
             {
-                path: 'excellentCurriculumDesignP',
+                path: 'excellentCurriculumDesignP/:id?',
                 component: excellentCurriculumDesignP,
                 name: 'q'
             },
             {
-                path: 'excellentGraduationProject',
+                path: 'excellentGraduationProject/:id?',
                 component: excellentGraduationProject,
                 name: 'r'
             },

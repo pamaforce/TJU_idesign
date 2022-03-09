@@ -48,7 +48,13 @@
                 :key="i"
                 class="author-class"
               >
-                <img v-image-preview :src="staticBaseUrl + item.url" />
+                <img
+                  :src="staticBaseUrl + item.url"
+                  preview="1"
+                  :preview-text="
+                    item.zh_names + ' ' + item.en_names + ' ' + item.grade
+                  "
+                />
                 <p>{{ item.zh_names }}</p>
                 <p>{{ item.en_names }}</p>
                 <p>{{ item.grade }}</p>
@@ -74,7 +80,7 @@
     </v-row>
     <v-row no-gutters>
       <v-col md="6" sm="12" cols="12"
-        ><img v-image-preview :src="data.thumbnail" style="width: 100%"
+        ><img :src="data.thumbnail" style="width: 100%" preview="2"
       /></v-col>
       <v-col md="6" sm="12" cols="12" class="intro-class"
         ><p>{{ data.intro_zh }}</p>
@@ -92,33 +98,33 @@
             <img class="useVideo-class" src="../../assets/play.svg" />
           </div>
           <img
-            v-image-preview
             :src="staticBaseUrl + data.photos[0].url"
             style="width: 100%"
+            preview="3"
           />
         </div>
         <img
-          v-image-preview
           :src="staticBaseUrl + data.photos[1].url"
           style="width: 100%"
+          preview="3"
         />
       </div>
       <div class="great-class">
         <img
-          v-image-preview
           :src="staticBaseUrl + data.photos[2].url"
           style="width: 100%; height: 100%"
+          preview="3"
         />
       </div>
       <div class="flex-class">
         <img
-          v-image-preview
           :src="staticBaseUrl + data.photos[3].url"
           style="width: 100%"
+          preview="3"
         /><img
-          v-image-preview
           :src="staticBaseUrl + data.photos[4].url"
           style="width: 100%"
+          preview="3"
         />
       </div>
     </v-row>
@@ -255,30 +261,32 @@ export default {
       }
     },
     findDetail() {
-      service(
-        "/portal/api_v1/get_design_detail?category_id=" +
-          this.$route.params.category_id +
-          "&id=" +
-          this.$route.params.id
-      ).then((data) => {
-        this.data.post_title = data.data.post_title;
-        this.data.post_title_en = data.data.post_title_en;
-        this.data.course_zh = data.data.course_zh;
-        this.data.course_en = data.data.course_en;
-        this.data.keywords_zh = data.data.keywords_zh.split("|");
-        this.data.keywords_en = data.data.keywords_en.split("|");
-        this.data.intro_zh = data.data.intro_zh;
-        this.data.intro_en = data.data.intro_en;
-        this.data.tutors_zh = data.data.tutors_zh;
-        this.data.tutors_en = data.data.tutors_en;
-        this.data.thumbnail = this.staticBaseUrl + data.data.more.thumbnail;
-        this.data.photos = data.data.more.photos;
-        this.data.authors = data.data.more.authors;
-        this.data.isVideo = data.data.more.files?.length > 0;
-        this.playerOptions.sources[0].src = this.data.isVideo
-          ? this.staticBaseUrl + data.data.more.files[0].url
-          : "";
-      });
+      if (this.$route.params.category_id && this.$route.params.id)
+        service(
+          "/portal/api_v1/get_design_detail?category_id=" +
+            this.$route.params.category_id +
+            "&id=" +
+            this.$route.params.id
+        ).then((data) => {
+          this.data.post_title = data.data.post_title;
+          this.data.post_title_en = data.data.post_title_en;
+          this.data.course_zh = data.data.course_zh;
+          this.data.course_en = data.data.course_en;
+          this.data.keywords_zh = data.data.keywords_zh.split("|");
+          this.data.keywords_en = data.data.keywords_en.split("|");
+          this.data.intro_zh = data.data.intro_zh;
+          this.data.intro_en = data.data.intro_en;
+          this.data.tutors_zh = data.data.tutors_zh;
+          this.data.tutors_en = data.data.tutors_en;
+          this.data.thumbnail = this.staticBaseUrl + data.data.more.thumbnail;
+          this.data.photos = data.data.more.photos;
+          this.data.authors = data.data.more.authors;
+          this.data.isVideo = data.data.more.files?.length > 0;
+          this.playerOptions.sources[0].src = this.data.isVideo
+            ? this.staticBaseUrl + data.data.more.files[0].url
+            : "";
+          this.$previewRefresh();
+        });
     },
     showVideo() {
       this.show = true;

@@ -3,16 +3,27 @@
     <div style="height: 70px"></div>
     <v-carousel cycle height="auto" interval="100000" hide-delimiter-background>
       <v-carousel-item v-for="(slide, i) in slides" :key="i">
-        <div class="fill-height">
-          <div class="img-back" @click="toUrl(slide.url)">
+        <div
+          class="fill-height"
+          style="background-color: #a3887d"
+          @click="toUrl(slide.url)"
+        >
+          <div class="color-class"></div>
+          <div class="img-back">
             <img
               :src="slide.src"
               :alt="slide.title"
               :class="'img-class' + (slide.url == '' ? '' : ' hover-class')"
             />
-            <div class="text-back">
-              <p>{{ slide.title }}</p>
-            </div>
+            <div class="text-back"></div>
+          </div>
+          <p class="page-class">
+            {{ (i + 1 + "").length === 1 ? "0" + (i + 1) : i + 1 }}
+          </p>
+          <div class="line-class"></div>
+          <div class="border-class">
+            <p>{{ get1stStr(slide.title) }}</p>
+            <p>{{ get2ndStr(slide.title) }}</p>
           </div>
         </div>
       </v-carousel-item>
@@ -112,6 +123,26 @@ export default {
         }
       });
     },
+    get1stStr(str) {
+      let l = str.length;
+      if (l <= 10) {
+        return str.slice(0, 5);
+      } else if (l <= 20) {
+        return str.slice(0, l - 10);
+      } else {
+        return str.slice(0, 10);
+      }
+    },
+    get2ndStr(str) {
+      let l = str.length;
+      if (l <= 10) {
+        return str.slice(5, l);
+      } else if (l <= 20) {
+        return str.slice(l - 10, l);
+      } else {
+        return str.slice(10, l);
+      }
+    },
     getMore() {
       if (JSON.stringify(this.newsList[this.newsList.length - 1]) != "{}") {
         this.currentLine++;
@@ -137,7 +168,7 @@ export default {
         this.slides.push({
           id: data.data[i].id,
           title: data.data[i].title,
-          src: "upload/" + data.data[i].image,
+          src: "http://idesign.tju.edu.cn/upload/" + data.data[i].image,
           url: data.data[i].url,
         });
       }
@@ -147,17 +178,63 @@ export default {
 </script>
 <style scoped>
 .img-back {
-  position: relative;
   display: inline-block;
-  height: 300px;
+  height: 295px;
+  width: 726px;
 }
 .fill-height {
-  max-height: 300px;
+  position: relative;
+  width: 1114px;
+  height: 295px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: right;
+  cursor: pointer;
+}
+.color-class {
+  width: 478px;
 }
 .img-class {
-  min-height: 300px;
-  height: 300px;
+  height: 295px;
+  width: 726px;
   vertical-align: bottom;
+}
+.page-class {
+  position: absolute;
+  left: 10px;
+  bottom: 5px;
+  color: white;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  transform: rotate(-90deg);
+}
+.line-class {
+  position: absolute;
+  height: 70px;
+  left: 22.5px;
+  bottom: 60px;
+  border-left: 1px solid white;
+}
+.border-class {
+  min-width: 415px;
+  height: 120px;
+  border: 2px solid white;
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  left: 80px;
+  text-align: left;
+  padding: 20px;
+}
+.border-class p {
+  display: block;
+  color: white;
+  line-height: 36px;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 0;
 }
 .text-back {
   position: relative;
@@ -177,14 +254,14 @@ export default {
   padding-top: 25px;
   font-size: 20px;
 }
-.text-back p {
+/* .text-back p {
   display: inline-block;
   max-width: 800px;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
+} */
 .text-back p:hover {
   border-bottom: 1px solid white;
 }
@@ -254,22 +331,22 @@ export default {
 }
 .v-item-group .v-btn--active {
   background-color: white !important;
-  width: 10px;
-  height: 10px;
-  margin-left: 17px;
-  margin-right: 17px;
+  width: 5px !important;
+  height: 5px !important;
+  margin-left: 8px !important;
+  margin-right: 8px !important;
 }
 .v-carousel__controls__item .v-btn__content {
-  width: 10px !important;
-  height: 10px !important;
-  margin-left: 17px !important;
-  margin-right: 17px !important;
+  width: 5px !important;
+  height: 5px !important;
+  margin-left: 8px !important;
+  margin-right: 8px !important;
 }
 .v-carousel__controls .v-btn--round {
   width: 10px !important;
   height: 10px !important;
-  margin-left: 17px !important;
-  margin-right: 17px !important;
+  margin-left: 12px !important;
+  margin-right: 12px !important;
 }
 .theme--dark.v-btn:hover::before {
   opacity: 0;

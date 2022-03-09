@@ -3,7 +3,7 @@
     <my-breadcrumbs title="发展历程" />
     <div v-html="html" style="margin-top: 20px" id="theNews"></div>
     <!-- <img
-      v-image-preview
+       
       src="../../assets/development.jpg"
       style="width: 100%"
     />

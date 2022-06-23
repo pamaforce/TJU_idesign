@@ -150,7 +150,7 @@
       ></div>
     </div>
     <div v-show="show" class="video-class" @click="show = false">
-      <div @click.stop="pre" class="main-video-class">
+      <div @click.stop class="main-video-class">
         <video-player
           class="video-player vjs-custom-skin"
           ref="videoPlayer"

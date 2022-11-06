@@ -1,11 +1,18 @@
 <template>
-  <div class="card-class" v-if="!this.isPhone || JSON.stringify(data) != '{}'">
+  <div
+    class="card-class"
+    v-if="!this.isPhone || JSON.stringify(data) != '{}'"
+    :title="data.title"
+  >
     <div
       v-if="JSON.stringify(data) != '{}'"
       @click="toCard"
       style="cursor: pointer"
     >
-      <v-img lazy-src="../assets/photo.jpg" :src="data.src"
+      <v-img
+        lazy-src="../assets/photo.jpg"
+        :src="data.src"
+        :aspect-ratio="16 / 9"
         ><template v-slot:placeholder>
           <v-row class="fill-height ma-0" align="center" justify="center">
             <v-progress-circular
@@ -89,8 +96,6 @@ export default {
 <style scoped>
 .card-class {
   width: 250px;
-  min-height: 180px;
-  height: auto;
   /* background-color: blueviolet; */
   margin-top: 15px;
   margin-bottom: 25px;
@@ -100,10 +105,6 @@ export default {
   filter: alpha(Opacity=80);
   -moz-opacity: 0.8;
   opacity: 0.8;
-}
-.card-class .v-image {
-  width: 100%;
-  height: 140px;
 }
 .title-class {
   font-size: 15px;
@@ -121,11 +122,6 @@ export default {
 @media screen and (max-width: 768px) {
   .card-class {
     width: calc(100vw - 30px);
-    height: auto;
-  }
-  .card-class img {
-    width: calc(100vw - 30px);
-    height: calc(56vw - 16.8px);
   }
 }
 </style>

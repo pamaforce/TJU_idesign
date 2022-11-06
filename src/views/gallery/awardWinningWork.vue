@@ -74,7 +74,9 @@ export default {
               y.push(data.data.data[i].more.authors[j].zh_names);
             this.detailList[c].push({
               title: data.data.data[i].post_title,
-              src: "upload/" + data.data.data[i].more.thumbnail,
+              src:
+                "http://idesign.tju.edu.cn/upload/" +
+                data.data.data[i].more.thumbnail,
               authors: y,
               term: data.data.data[i].post_term,
               id: data.data.data[i].id,
@@ -87,9 +89,11 @@ export default {
               data.data.data[i].id +
               "-";
           } else if (flag) {
-            if (parseInt(i / 3) == parseInt((i - 1) / 3) && i)
+            if (parseInt(i / 3) == parseInt((i - 1) / 3) && i) {
               this.detailList[c].push({});
-            else flag = false;
+              this.detailList[c].push({});
+              this.detailList[c].push({});
+            } else flag = false;
           }
         }
         this.current_page = c;

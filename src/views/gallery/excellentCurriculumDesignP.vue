@@ -19,6 +19,7 @@
       >
         暂无数据
       </p>
+      <p class="back-class noselect" @click="goBack">返回</p>
       <div class="excellentCurriculumDesignP-class">
         <template v-if="loadingStatue">
           <v-skeleton-loader
@@ -43,7 +44,6 @@
           :currentIndex="current_page_1"
           @changeIndex="changeIndex_1"
         />
-        <p class="back-class noselect" @click="goBack">返回</p>
       </div>
     </template>
     <template v-else>
@@ -110,7 +110,9 @@ export default {
           if (data.data.data[i]) {
             this.designList[c].push({
               id: data.data.data[i].id,
-              src: "upload/" + data.data.data[i].more.thumbnail,
+              src:
+                "http://idesign.tju.edu.cn/upload/" +
+                data.data.data[i].more.thumbnail,
               desc: data.data.data[i].description,
               name: data.data.data[i].name,
               str1: data.data.data[i].str1,
@@ -146,7 +148,9 @@ export default {
               y.push(data.data.data[i].more.authors[j].zh_names);
             this.detailList[c].push({
               title: data.data.data[i].post_title,
-              src: "upload/" + data.data.data[i].more.thumbnail,
+              src:
+                "http://idesign.tju.edu.cn/upload/" +
+                data.data.data[i].more.thumbnail,
               authors: y,
               term: data.data.data[i].post_term,
               id: data.data.data[i].id,
@@ -159,9 +163,11 @@ export default {
               data.data.data[i].id +
               "-";
           } else if (flag) {
-            if (parseInt(i / 3) == parseInt((i - 1) / 3) && i)
+            if (parseInt(i / 3) == parseInt((i - 1) / 3) && i) {
               this.detailList[c].push({});
-            else flag = false;
+              this.detailList[c].push({});
+              this.detailList[c].push({});
+            } else flag = false;
           }
         }
         this.loadingStatue = false;
@@ -252,9 +258,10 @@ export default {
   text-align: justify;
 }
 .back-class {
+  text-align: center;
   font-size: 14px;
   color: #4e4e4e;
-  margin: 0 auto;
+  margin: 10px auto;
   cursor: pointer;
 }
 </style>

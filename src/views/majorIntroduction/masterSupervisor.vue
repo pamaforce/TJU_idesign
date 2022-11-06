@@ -51,7 +51,8 @@ export default {
           if (data.data.data[i]) {
             this.teacherList[c].push({
               name: data.data.data[i].name,
-              avatar: "upload/" + data.data.data[i].avatar,
+              avatar:
+                "http://idesign.tju.edu.cn/upload/" + data.data.data[i].avatar,
               desc:
                 data.data.data[i].ttitle +
                 " | " +
@@ -97,5 +98,6 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
   padding-top: 15px;
+  padding-bottom: 50px;
 }
 </style>

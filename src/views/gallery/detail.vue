@@ -9,19 +9,26 @@
     <v-row no-gutters style="margin-bottom: 30px">
       <v-col lg="9" md="9" sm="12">
         <v-row>
-          <v-col lg="6" md="4" sm="12">
+          <v-col lg="6" md="8" sm="12">
             <div class="t1-class offset-1-class">
               <div class="t1-label-class">
                 <p>指导教师</p>
                 <p>Supervisor</p>
               </div>
               <div class="t1-content-class">
-                <p>{{ data.tutors_zh }}</p>
+                <p>
+                  <span
+                    v-for="(item, i) in data.tutors_zh.split(' ')"
+                    :key="i"
+                    @click="toTeacher(item)"
+                    >{{ item }}
+                  </span>
+                </p>
                 <p>{{ data.tutors_en }}</p>
               </div>
             </div>
           </v-col>
-          <v-col lg="6" md="8" sm="12" class="center-class">
+          <v-col lg="6" md="4" sm="12" class="center-class">
             <div style="display: inline-block">
               <div class="t1-class">
                 <div class="t1-label-class">
@@ -47,14 +54,9 @@
                 v-for="(item, i) in data.authors"
                 :key="i"
                 class="author-class"
+                @click="toPerson(item)"
               >
-                <img
-                  :src="staticBaseUrl + item.url"
-                  preview="1"
-                  :preview-text="
-                    item.zh_names + ' ' + item.en_names + ' ' + item.grade
-                  "
-                />
+                <img :src="staticBaseUrl + item.url" />
                 <p>{{ item.zh_names }}</p>
                 <p>{{ item.en_names }}</p>
                 <p>{{ item.grade }}</p>
@@ -82,10 +84,10 @@
       <v-col md="6" sm="12" cols="12"
         ><img :src="data.thumbnail" style="width: 100%" preview="2"
       /></v-col>
-      <v-col md="6" sm="12" cols="12" class="intro-class"
-        ><p>{{ data.intro_zh }}</p>
-        <p>{{ data.intro_en }}</p></v-col
-      >
+      <v-col md="6" sm="12" cols="12" class="intro-class">
+        <pre>{{ data.intro_zh }}</pre>
+        <pre>{{ data.intro_en }}</pre>
+      </v-col>
     </v-row>
     <v-row class="photos-class">
       <div class="flex-class">
@@ -152,7 +154,7 @@
     <div v-show="show" class="video-class" @click="show = false">
       <div @click.stop class="main-video-class">
         <video-player
-          class="video-player vjs-custom-skin"
+          class="video-player vjs-custom-skin vjs-big-play-centered"
           ref="videoPlayer"
           @click.stop="() => {}"
           :playsinline="true"
@@ -182,7 +184,7 @@ export default {
     show: false,
     canPre: false,
     canNext: false,
-    staticBaseUrl: "upload/",
+    staticBaseUrl: "http://idesign.tju.edu.cn/upload/",
     data: {
       post_title: "",
       post_title_en: "",
@@ -226,7 +228,9 @@ export default {
   }),
   methods: {
     toBack() {
-      this.$router.push(this.from);
+      if (this.$route.query.back) {
+        this.$router.go(-1);
+      } else this.$router.push(this.from || "/gallery");
     },
     toPre() {
       if (this.canPre) {
@@ -301,6 +305,25 @@ export default {
         this.list != undefined &&
         this.current != undefined &&
         parseInt(this.current) < this.list.split("-").length - 2;
+    },
+    toPerson(val) {
+      this.$router.push({
+        path: "/collection",
+        query: {
+          name: val.zh_names,
+          sno: val.xuehao,
+          from: this.$route.fullPath,
+        },
+      });
+    },
+    toTeacher(val) {
+      this.$router.push({
+        path: "/collection",
+        query: {
+          tutor: val,
+          from: this.$route.fullPath,
+        },
+      });
     },
   },
   watch: {
@@ -393,6 +416,9 @@ export default {
   line-height: 24px;
   font-family: "Montserrat";
 }
+.t1-content-class p span {
+  cursor: pointer;
+}
 .authors-class {
   display: flex;
   justify-content: left;
@@ -403,6 +429,7 @@ export default {
   margin-bottom: 10px;
   text-align: center;
   width: 85px;
+  cursor: pointer;
 }
 .author-class img {
   width: 85px;
@@ -424,13 +451,14 @@ export default {
   padding: 12px;
   margin-left: 12px;
 }
-.intro-class p {
+.intro-class pre {
   padding-left: 20px;
   text-align: justify;
   font-family: "Montserrat";
   font-size: 15px;
   color: #4e4e4e;
   margin-bottom: 5px;
+  white-space: pre-wrap;
 }
 .flex-class {
   display: flex;
@@ -525,7 +553,7 @@ export default {
   .title-en-class {
     font-size: 15px;
   }
-  .intro-class p {
+  .intro-class pre {
     padding-left: 0;
   }
   .author-class {

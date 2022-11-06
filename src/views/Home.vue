@@ -1,21 +1,29 @@
 <template>
   <div style="text-align: center">
     <div style="height: 70px"></div>
-    <v-carousel cycle height="auto" interval="100000" hide-delimiter-background>
+    <v-carousel
+      cycle
+      height="auto"
+      interval="100000"
+      hide-delimiter-background
+      show-arrows-on-hover
+      class="carousel-width"
+    >
       <v-carousel-item v-for="(slide, i) in slides" :key="i">
         <div
           class="fill-height"
-          style="background-color: #a3887d"
+          :style="'background-color:' + (slide.description || '#a3887d')"
           @click="toUrl(slide.url)"
+          :title="slide.title"
         >
           <div class="color-class"></div>
           <div class="img-back">
-            <img
+            <v-img
               :src="slide.src"
               :alt="slide.title"
               :class="'img-class' + (slide.url == '' ? '' : ' hover-class')"
             />
-            <div class="text-back"></div>
+            <!-- <div class="text-back"></div> -->
           </div>
           <p class="page-class">
             {{ (i + 1 + "").length === 1 ? "0" + (i + 1) : i + 1 }}
@@ -107,7 +115,9 @@ export default {
           let x = new Date(data.data.data[i].published_time * 1000);
           this.newsList.push({
             id: data.data.data[i].id,
-            src: "upload/" + data.data.data[i].more.thumbnail,
+            src:
+              "http://idesign.tju.edu.cn/upload/" +
+              data.data.data[i].more.thumbnail,
             type: data.data.data[i].category_name.trim(),
             title: data.data.data[i].post_title.trim(),
             date:
@@ -168,6 +178,7 @@ export default {
         this.slides.push({
           id: data.data[i].id,
           title: data.data[i].title,
+          description: data.data[i].description,
           src: "http://idesign.tju.edu.cn/upload/" + data.data[i].image,
           url: data.data[i].url,
         });
@@ -181,6 +192,11 @@ export default {
   display: inline-block;
   height: 295px;
   width: 726px;
+}
+.carousel-width {
+  position: relative;
+  width: 1114px;
+  margin: 0 auto;
 }
 .fill-height {
   position: relative;
@@ -218,20 +234,20 @@ export default {
 }
 .border-class {
   min-width: 415px;
-  height: 120px;
+  max-width: 600px;
   border: 2px solid white;
   position: absolute;
   bottom: 50%;
   transform: translateY(50%);
   left: 80px;
   text-align: left;
-  padding: 20px;
+  padding: 15px 20px;
 }
 .border-class p {
   display: block;
   color: white;
-  line-height: 36px;
-  font-size: 32px;
+  line-height: 32px;
+  font-size: 26px;
   font-weight: 700;
   letter-spacing: 1.5px;
   margin-bottom: 0;
@@ -270,12 +286,12 @@ export default {
 }
 .title-class {
   display: inline-block;
-  padding-top: 10px;
+  padding-top: 12px;
   font-weight: 700;
   font-size: 26px;
   color: #4e4e4e;
   border-bottom: 3px solid #4e4e4e;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
 }
 .content-class {
   width: 1264px;
@@ -305,10 +321,71 @@ export default {
   }
   .title-class {
     font-size: 22px;
-    padding-top: 8px;
+    padding-top: 30px;
   }
   .text-back p {
     max-width: 550px;
+  }
+}
+@media screen and (max-width: 1114px) {
+  .fill-height {
+    width: 100vw;
+    height: 56.25vw;
+    flex-direction: column-reverse;
+  }
+  .carousel-width {
+    width: 100vw;
+  }
+  .img-back {
+    width: 100vw;
+    height: 40.6vw;
+  }
+  .img-class {
+    width: 100vw;
+    height: 40.6vw;
+  }
+  .color-class {
+    width: 100vw;
+    height: 15.65vw;
+  }
+  .page-class {
+    left: unset;
+    right: 24px;
+    bottom: 10px;
+    margin-bottom: 0;
+    font-size: 14px;
+    transform: rotate(0);
+  }
+  .line-class {
+    position: absolute;
+    height: unset;
+    width: 50px;
+    left: unset;
+    bottom: 20px;
+    right: 55px;
+    border: 0;
+    border-top: 1px solid white;
+  }
+  .border-class {
+    min-width: 80px;
+    max-width: 200px;
+    height: unset;
+    border: 1px solid white;
+    position: absolute;
+    bottom: 20px;
+    transform: translateY(0);
+    left: 20px;
+    text-align: left;
+    padding: 10px;
+  }
+  .border-class p {
+    line-height: unset;
+    display: block;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 0;
   }
 }
 @media screen and (max-width: 768px) {
@@ -373,15 +450,40 @@ export default {
 }
 @media screen and (max-width: 1264px) {
   .v-carousel__controls {
-    right: 40px !important;
+    right: 15px !important;
     transform: translateX(0) !important;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1114px) {
   .v-carousel__controls {
-    right: 50% !important;
-    transform: translateX(50%) !important;
-    bottom: 0 !important;
+    right: 15px !important;
+    bottom: 14vw !important;
+    transform: translateX(0) !important;
+  }
+  .v-window__prev {
+    visibility: hidden;
+  }
+  .v-window__next {
+    visibility: hidden;
+  }
+  .v-item-group .v-btn--active {
+    background-color: white !important;
+    width: 8px !important;
+    height: 8px !important;
+    margin-left: 8px !important;
+    margin-right: 8px !important;
+  }
+  .v-carousel__controls__item .v-btn__content {
+    width: 8px !important;
+    height: 8px !important;
+    margin-left: 8px !important;
+    margin-right: 8px !important;
+  }
+  .v-carousel__controls .v-btn--round {
+    width: 9px !important;
+    height: 9px !important;
+    margin-left: 8px !important;
+    margin-right: 8px !important;
   }
 }
 </style>

@@ -47,6 +47,7 @@ import excellentCurriculumDesignU from '../views/gallery/excellentCurriculumDesi
 import excellentCurriculumDesignP from '../views/gallery/excellentCurriculumDesignP.vue'
 import excellentGraduationProject from '../views/gallery/excellentGraduationProject.vue'
 import detail from '../views/gallery/detail.vue'
+import collection from '../views/gallery/collection.vue'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -56,6 +57,7 @@ const routes = [{
     {
         path: '/majorIntroduction',
         component: majorIntroduction,
+        redirect: "/majorIntroduction/mission",
         children: [{
                 path: 'mission',
                 component: mission,
@@ -106,6 +108,7 @@ const routes = [{
     {
         path: '/education',
         component: education,
+        redirect: "/education/undergraduate",
         children: [{
                 path: 'alumniAndAlumnae/:year?',
                 component: alumniAndAlumnae,
@@ -141,6 +144,7 @@ const routes = [{
     },
     {
         path: "/gallery",
+        redirect: "/gallery/excellentCurriculumDesignU",
         component: gallery,
         children: [{
                 path: 'awardWinningWork',
@@ -168,6 +172,12 @@ const routes = [{
                 name: 'r'
             },
             {
+                path: ':id',
+                component: detail,
+                name: 'detail_design',
+                props: route => ({ list: route.query.list, current: route.query.current, from: route.query.from })
+            },
+            {
                 path: ':category_id/:id',
                 component: detail,
                 name: 'detail',
@@ -178,6 +188,7 @@ const routes = [{
     {
         path: '/news',
         component: news,
+        redirect: "/news/lecture1",
         children: [{
                 path: 'activity1',
                 component: activity1,
@@ -276,6 +287,7 @@ const routes = [{
     {
         path: "/internationalExchange",
         component: internationalExchange,
+        redirect: "/internationalExchange/EnglishCourse",
         children: [{
                 path: 'designWorkshop',
                 component: designWorkshop,
@@ -297,6 +309,17 @@ const routes = [{
                 props: route => ({ list: route.query.list, current: route.query.current, from: route.query.from })
             }
         ]
+    },
+    {
+        path: '/',
+        component: gallery,
+        children: [{
+            path: 'collection',
+            component: collection,
+            name: 'collection',
+            props: route => ({ name: route.query.name, sno: route.query.sno, tutor: route.query.tutor, from: route.query.from })
+
+        }]
     },
     {
         path: '*',

@@ -100,7 +100,8 @@ export default {
   },
   watch: {
     $route() {
-      if (this.$route.name == "detail") this.isDetail = true;
+      if (this.$route.name == "detail" || this.$route.name == "collection")
+        this.isDetail = true;
       else this.isDetail = false;
       if (this.$route.name > "o" && this.$route.name < "r") {
         this.subStatue = true;
@@ -108,7 +109,8 @@ export default {
     },
   },
   created: function () {
-    if (this.$route.name == "detail") this.isDetail = true;
+    if (this.$route.name == "detail" || this.$route.name == "collection")
+      this.isDetail = true;
     else this.isDetail = false;
     if (this.$route.name > "o" && this.$route.name < "r") {
       this.subStatue = true;

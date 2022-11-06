@@ -1,11 +1,12 @@
 <template>
-  <div class="news-class">
+  <div class="news-class" :title="data.title">
     <template v-if="JSON.stringify(data) != '{}'">
       <v-img
         lazy-src="../assets/photo.jpg"
         :src="data.src"
         @click="toNews"
-        style="width: 100%; height: 190px; cursor: pointer"
+        style="width: 100%; cursor: pointer"
+        :aspect-ratio="16 / 9"
         ><template v-slot:placeholder>
           <v-row class="fill-height ma-0" align="center" justify="center">
             <v-progress-circular
@@ -66,7 +67,7 @@ img:hover {
 }
 .news-class {
   display: inline-block;
-  margin-top: 25px;
+  margin-top: 20px;
   width: 338px;
 }
 .info-class {
@@ -89,7 +90,7 @@ img:hover {
     font-size: 13px;
   }
   .news-class {
-    height: 260px;
+    width: 300px;
   }
 }
 </style>

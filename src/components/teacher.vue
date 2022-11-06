@@ -1,6 +1,7 @@
 <template>
   <div
     class="teacher-class"
+    :title="data.name"
     v-if="!this.isPhone || JSON.stringify(data) != '{}'"
   >
     <div
@@ -8,7 +9,10 @@
       :class="[data.url == '' ? '' : 'hover-class']"
       @click="toTeacher"
     >
-      <v-img lazy-src="../assets/photo.jpg" :src="data.avatar"
+      <v-img
+        lazy-src="../assets/photo.jpg"
+        :src="data.avatar"
+        :aspect-ratio="1 / 1"
         ><template v-slot:placeholder>
           <v-row class="fill-height ma-0" align="center" justify="center">
             <v-progress-circular
@@ -46,13 +50,8 @@ export default {
 <style scoped>
 .teacher-class {
   width: 182px;
-  height: 325px;
   margin: 10px 0;
   /* background-color: aqua; */
-}
-.teacher-class .v-image {
-  width: 100%;
-  height: 182px;
 }
 .hover-class {
   cursor: pointer;
@@ -73,7 +72,6 @@ export default {
   font-size: 13px;
   color: #6c6c6c;
   margin-bottom: 3px;
-  text-align: justify;
   overflow: hidden;
   -webkit-line-clamp: 3;
   text-overflow: ellipsis;
@@ -82,13 +80,8 @@ export default {
 }
 @media screen and (max-width: 768px) {
   .teacher-class {
-    width: 160px;
-    height: 286px;
-    margin: 10px 0;
-  }
-  .teacher-class img {
-    width: 100%;
-    height: 160px;
+    width: 150px;
+    margin: 20px 0;
   }
   .desc-class {
     -webkit-line-clamp: 2;

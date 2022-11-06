@@ -2,13 +2,17 @@
   <div
     class="detail-class"
     v-if="!this.isPhone || JSON.stringify(data) != '{}'"
+    :title="data.title"
   >
     <div
       v-if="JSON.stringify(data) != '{}'"
       @click="toDetail"
       style="cursor: pointer"
     >
-      <v-img lazy-src="../assets/photo.jpg" :src="data.src"
+      <v-img
+        lazy-src="../assets/photo.jpg"
+        :src="data.src"
+        :aspect-ratio="16 / 9"
         ><template v-slot:placeholder>
           <v-row class="fill-height ma-0" align="center" justify="center">
             <v-progress-circular
@@ -17,7 +21,7 @@
             ></v-progress-circular>
           </v-row> </template
       ></v-img>
-      <p class="title-class">{{ data.title }}</p>
+      <p class="title-class">{{ data.title }}123</p>
       <div class="block-class">
         <p class="author-class" v-for="(item, i) in data.authors" :key="i">
           {{ item }}
@@ -63,10 +67,6 @@ export default {
   -moz-opacity: 0.8;
   opacity: 0.8;
 }
-.detail-class .v-image {
-  width: 100%;
-  height: 140px;
-}
 .title-class {
   font-size: 18px;
   text-align: justify;
@@ -92,11 +92,6 @@ export default {
 @media screen and (max-width: 768px) {
   .detail-class {
     width: calc(100vw - 30px);
-    height: calc(76vw - 22.8px);
-  }
-  .detail-class img {
-    width: calc(100vw - 30px);
-    height: calc(56vw - 16.8px);
   }
 }
 </style>

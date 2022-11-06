@@ -2,13 +2,17 @@
   <div
     class="design-class"
     v-if="!this.isPhone || JSON.stringify(data) != '{}'"
+    :title="data.name"
   >
     <div
       v-if="JSON.stringify(data) != '{}'"
       @click="toDesign"
       style="cursor: pointer"
     >
-      <v-img lazy-src="../assets/photo.jpg" :src="data.src"
+      <v-img
+        lazy-src="../assets/photo.jpg"
+        :src="data.src"
+        :aspect-ratio="16 / 9"
         ><template v-slot:placeholder>
           <v-row class="fill-height ma-0" align="center" justify="center">
             <v-progress-circular
@@ -18,7 +22,7 @@
           </v-row> </template
       ></v-img>
       <p class="name-class">{{ data.name }}</p>
-      <p class="teacher-class">
+      <p class="teacher-class" v-if="showTeacher">
         {{ "任课教师：" + data.str1 + " " + data.str2 }}
       </p>
     </div>
@@ -29,6 +33,10 @@ export default {
   name: "myDesign",
   props: {
     data: Object,
+    showTeacher: {
+      type: Boolean,
+      default: true,
+    },
   },
   data: () => ({
     isPhone: false,
@@ -47,7 +55,6 @@ export default {
 <style scoped>
 .design-class {
   width: 250px;
-  height: 190px;
   /* background-color: blueviolet; */
   margin: 15px 0;
   position: relative;
@@ -56,10 +63,6 @@ export default {
   filter: alpha(Opacity=80);
   -moz-opacity: 0.8;
   opacity: 0.8;
-}
-.design-class .v-image {
-  width: 100%;
-  height: 140px;
 }
 .name-class {
   font-weight: 700;
@@ -76,11 +79,6 @@ export default {
 @media screen and (max-width: 768px) {
   .design-class {
     width: calc(100vw - 30px);
-    height: calc(76vw - 22.8px);
-  }
-  .design-class img {
-    width: calc(100vw - 30px);
-    height: calc(56vw - 16.8px);
   }
 }
 </style>

@@ -5,6 +5,9 @@ import router from './router'
 import "@/assets/text/text.css";
 import preview from 'vue-photo-preview'
 import 'vue-photo-preview/dist/skin.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import '@mdi/font/css/materialdesignicons.css'
+
 Vue.use(preview)
 Vue.config.productionTip = false
 

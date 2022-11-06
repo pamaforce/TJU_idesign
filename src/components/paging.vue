@@ -1,5 +1,5 @@
 <template>
-  <div class="paging-class noselect">
+  <div class="paging-class noselect" v-if="totalIndex > 1">
     <v-icon class="arrow-class" @click="preIndex" v-if="totalIndex > 0"
       >mdi-menu-left</v-icon
     >

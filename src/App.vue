@@ -81,4 +81,22 @@ export default {
   width: 100%;
   height: inherit;
 }
+.dot-ani {
+  display: inline-block;
+  height: 12px;
+  line-height: 12px;
+  overflow: hidden;
+}
+.dot-ani::after {
+  display: inline-table;
+  white-space: pre;
+  content: "\A.\A..\A...";
+  animation: spin 2s steps(4) infinite;
+}
+@keyframes spin {
+  to {
+    -webkit-transform: translateY(-48px);
+    transform: translateY(-48px);
+  }
+}
 </style>

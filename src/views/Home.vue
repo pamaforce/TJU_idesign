@@ -30,8 +30,7 @@
           </p>
           <div class="line-class"></div>
           <div class="border-class">
-            <p>{{ get1stStr(slide.title) }}</p>
-            <p>{{ get2ndStr(slide.title) }}</p>
+            <p>{{ slide.title }}</p>
           </div>
         </div>
       </v-carousel-item>
@@ -115,9 +114,7 @@ export default {
           let x = new Date(data.data.data[i].published_time * 1000);
           this.newsList.push({
             id: data.data.data[i].id,
-            src:
-              "http://idesign.tju.edu.cn/upload/" +
-              data.data.data[i].more.thumbnail,
+            src: "upload/" + data.data.data[i].more.thumbnail,
             type: data.data.data[i].category_name.trim(),
             title: data.data.data[i].post_title.trim(),
             date:
@@ -132,26 +129,6 @@ export default {
             "-";
         }
       });
-    },
-    get1stStr(str) {
-      let l = str.length;
-      if (l <= 10) {
-        return str.slice(0, 5);
-      } else if (l <= 20) {
-        return str.slice(0, l - 10);
-      } else {
-        return str.slice(0, 10);
-      }
-    },
-    get2ndStr(str) {
-      let l = str.length;
-      if (l <= 10) {
-        return str.slice(5, l);
-      } else if (l <= 20) {
-        return str.slice(l - 10, l);
-      } else {
-        return str.slice(10, l);
-      }
     },
     getMore() {
       if (JSON.stringify(this.newsList[this.newsList.length - 1]) != "{}") {
@@ -179,7 +156,7 @@ export default {
           id: data.data[i].id,
           title: data.data[i].title,
           description: data.data[i].description,
-          src: "http://idesign.tju.edu.cn/upload/" + data.data[i].image,
+          src: "upload/" + data.data[i].image,
           url: data.data[i].url,
         });
       }
@@ -233,23 +210,22 @@ export default {
   border-left: 1px solid white;
 }
 .border-class {
-  min-width: 415px;
-  max-width: 600px;
+  width: 365px;
   border: 2px solid white;
   position: absolute;
   bottom: 50%;
   transform: translateY(50%);
-  left: 80px;
+  left: 65px;
   text-align: left;
-  padding: 15px 20px;
+  padding: 20px 20px;
+  padding-right: 50px;
 }
 .border-class p {
   display: block;
   color: white;
-  line-height: 32px;
-  font-size: 26px;
+  font-size: 21px;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   margin-bottom: 0;
 }
 .text-back {
@@ -351,7 +327,7 @@ export default {
   .page-class {
     left: unset;
     right: 24px;
-    bottom: 10px;
+    bottom: 5px;
     margin-bottom: 0;
     font-size: 14px;
     transform: rotate(0);
@@ -361,28 +337,28 @@ export default {
     height: unset;
     width: 50px;
     left: unset;
-    bottom: 20px;
+    bottom: 15px;
     right: 55px;
     border: 0;
     border-top: 1px solid white;
   }
   .border-class {
     min-width: 80px;
-    max-width: 200px;
+    max-width: 220px;
     height: unset;
     border: 1px solid white;
     position: absolute;
-    bottom: 20px;
+    bottom: 15px;
     transform: translateY(0);
     left: 20px;
     text-align: left;
-    padding: 10px;
+    padding: 5px 10px;
   }
   .border-class p {
     line-height: unset;
     display: block;
     color: white;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.5px;
     margin-bottom: 0;

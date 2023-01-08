@@ -21,7 +21,7 @@
             ></v-progress-circular>
           </v-row> </template
       ></v-img>
-      <p class="title-class">{{ data.title }}123</p>
+      <p class="title-class">{{ data.title }}</p>
       <div class="block-class">
         <p class="author-class" v-for="(item, i) in data.authors" :key="i">
           {{ item }}

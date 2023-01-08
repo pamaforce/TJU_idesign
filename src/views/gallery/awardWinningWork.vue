@@ -74,9 +74,7 @@ export default {
               y.push(data.data.data[i].more.authors[j].zh_names);
             this.detailList[c].push({
               title: data.data.data[i].post_title,
-              src:
-                "http://idesign.tju.edu.cn/upload/" +
-                data.data.data[i].more.thumbnail,
+              src: "upload/" + data.data.data[i].more.thumbnail,
               authors: y,
               term: data.data.data[i].post_term,
               id: data.data.data[i].id,

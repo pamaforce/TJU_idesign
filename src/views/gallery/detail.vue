@@ -184,7 +184,7 @@ export default {
     show: false,
     canPre: false,
     canNext: false,
-    staticBaseUrl: "http://idesign.tju.edu.cn/upload/",
+    staticBaseUrl: "upload/",
     data: {
       post_title: "",
       post_title_en: "",

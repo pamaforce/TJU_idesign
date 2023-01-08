@@ -16,6 +16,7 @@
       >mdi-menu-right</v-icon
     >
   </div>
+  <div v-else class="fill-height-class"></div>
 </template>
 <script>
 export default {
@@ -66,6 +67,10 @@ export default {
 }
 .arrow-class {
   cursor: pointer;
+}
+.fill-height-class {
+  width: 100%;
+  height: 30px;
 }
 </style>
 <style>

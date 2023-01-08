@@ -3,7 +3,13 @@
     <template v-if="statue">
       <p class="name-class">{{ detailData.name }}</p>
       <p class="teacher-class">
-        {{ "任课教师：" + detailData.str1 + " " + detailData.str2 }}
+        任课教师：<span
+          v-for="(item, i) in detailData.str1.split(' ')"
+          :key="i"
+          @click="toCollection(item)"
+          >{{ item }}
+        </span>
+        {{ detailData.str2 }}
       </p>
       <p class="desc-class">
         {{ detailData.desc }}
@@ -19,7 +25,6 @@
       >
         暂无数据
       </p>
-      <p class="back-class noselect" @click="goBack">返回</p>
       <div class="excellentCurriculumDesignU-class">
         <template v-if="loadingStatue">
           <v-skeleton-loader
@@ -44,6 +49,9 @@
           :currentIndex="current_page_1"
           @changeIndex="changeIndex_1"
         />
+        <div class="fork-class noselect">
+          <div class="fork-text-class" @click="goBack">返回课程列表</div>
+        </div>
       </div>
     </template>
     <template v-else>
@@ -92,6 +100,15 @@ export default {
     idList: "",
   }),
   methods: {
+    toCollection(val) {
+      this.$router.push({
+        path: "/collection",
+        query: {
+          tutor: val,
+          from: this.$route.fullPath,
+        },
+      });
+    },
     fillList(c) {
       service(
         "/portal/api_v1/get_cates_by_bigtype?big_type=5&current_page=" +
@@ -104,9 +121,7 @@ export default {
           if (data.data.data[i]) {
             this.designList[c].push({
               id: data.data.data[i].id,
-              src:
-                "http://idesign.tju.edu.cn/upload/" +
-                data.data.data[i].more.thumbnail,
+              src: "upload/" + data.data.data[i].more.thumbnail,
               desc: data.data.data[i].description,
               name: data.data.data[i].name,
               str1: data.data.data[i].str1,
@@ -142,9 +157,7 @@ export default {
               y.push(data.data.data[i].more.authors[j].zh_names);
             this.detailList[c].push({
               title: data.data.data[i].post_title,
-              src:
-                "http://idesign.tju.edu.cn/upload/" +
-                data.data.data[i].more.thumbnail,
+              src: "upload/" + data.data.data[i].more.thumbnail,
               authors: y,
               term: data.data.data[i].post_term,
               id: data.data.data[i].id,
@@ -246,6 +259,9 @@ export default {
   font-size: 14px;
   color: #4e4e4e;
 }
+.teacher-class span {
+  cursor: pointer;
+}
 .desc-class {
   font-size: 14px;
   color: #4e4e4e;
@@ -257,5 +273,49 @@ export default {
   color: #4e4e4e;
   margin: 10px auto;
   cursor: pointer;
+}
+.fork-class {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+.fork-class div {
+  border: 1px solid #4e4e4e;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.fork-text-class {
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 35px;
+  font-size: 16px;
+  margin: 0;
+  color: #4e4e4e;
+}
+@media screen and (max-width: 765px) {
+  .fork-class {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .fork-class div {
+    border: 1px solid #4e4e4e;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .fork-text-class {
+    padding: 5px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    margin: 0;
+    color: #4e4e4e;
+  }
 }
 </style>

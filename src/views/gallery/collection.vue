@@ -29,6 +29,7 @@
                     ? staticBaseUrl + tutorSpecial.more.thumbnail
                     : staticBaseUrl + authorInfo.url
                 "
+                @error="loadErr"
                 :class="isTutor ? 'img-class' : ''"
                 :aspect-ratio="16 / 9"
                 @click="specialTo"
@@ -87,7 +88,9 @@
               <v-img
                 :aspect-ratio="16 / 9"
                 lazy-src="../../assets/photo.jpg"
-                :src="staticBaseUrl + collectionList[7].more.thumbnail"
+                :src="staticBasePureUrl + collectionList[7].more.thumbnail"
+                @error="loadErr(7)"
+                ref="img7"
                 :title="collectionList[7].post_title"
                 class="img-class"
                 @click="toGallery(7)"
@@ -125,7 +128,9 @@
                 :aspect-ratio="16 / 9"
                 lazy-src="../../assets/photo.jpg"
                 height="100%"
-                :src="staticBaseUrl + collectionList[6].more.thumbnail"
+                :src="staticBasePureUrl + collectionList[6].more.thumbnail"
+                @error="loadErr(6)"
+                ref="img6"
                 :title="collectionList[6].post_title"
                 class="img-class"
                 @click="toGallery(6)"
@@ -141,11 +146,11 @@
                     ></v-progress-circular>
                   </v-row>
                 </template>
-                <div class="hover-class hover-class-s2">
-                  <p class="hover-class-course hover-class-course-s2">
+                <div class="hover-class hover-class-s1">
+                  <p class="hover-class-course hover-class-course-s1">
                     {{ collectionList[6].course_zh }}
                   </p>
-                  <p class="hover-class-title hover-class-title-s2">
+                  <p class="hover-class-title hover-class-title-s1">
                     {{ collectionList[6].post_title }}
                   </p>
                 </div></v-img
@@ -160,7 +165,9 @@
                 :aspect-ratio="16 / 9"
                 lazy-src="../../assets/photo.jpg"
                 height="100%"
-                :src="staticBaseUrl + collectionList[0].more.thumbnail"
+                :src="staticBasePureUrl + collectionList[0].more.thumbnail"
+                @error="loadErr(0)"
+                ref="img0"
                 :title="collectionList[0].post_title"
                 class="img-class"
                 @click="toGallery(0)"
@@ -196,7 +203,9 @@
                   :aspect-ratio="16 / 9"
                   lazy-src="../../assets/photo.jpg"
                   height="100%"
-                  :src="staticBaseUrl + collectionList[8].more.thumbnail"
+                  :src="staticBasePureUrl + collectionList[8].more.thumbnail"
+                  @error="loadErr(8)"
+                  ref="img8"
                   :title="collectionList[8].post_title"
                   class="img-class"
                   @click="toGallery(8)"
@@ -231,7 +240,9 @@
                   :aspect-ratio="16 / 9"
                   lazy-src="../../assets/photo.jpg"
                   height="100%"
-                  :src="staticBaseUrl + collectionList[5].more.thumbnail"
+                  :src="staticBasePureUrl + collectionList[5].more.thumbnail"
+                  @error="loadErr(5)"
+                  ref="img5"
                   :title="collectionList[5].post_title"
                   class="img-class"
                   @click="toGallery(5)"
@@ -247,11 +258,11 @@
                       ></v-progress-circular>
                     </v-row>
                   </template>
-                  <div class="hover-class hover-class-s2">
-                    <p class="hover-class-course hover-class-course-s2">
+                  <div class="hover-class hover-class-s3">
+                    <p class="hover-class-course hover-class-course-s4">
                       {{ collectionList[5].course_zh }}
                     </p>
-                    <p class="hover-class-title hover-class-title-s2">
+                    <p class="hover-class-title hover-class-title-s4">
                       {{ collectionList[5].post_title }}
                     </p>
                   </div></v-img
@@ -270,7 +281,9 @@
                   :aspect-ratio="16 / 9"
                   lazy-src="../../assets/photo.jpg"
                   height="100%"
-                  :src="staticBaseUrl + collectionList[4].more.thumbnail"
+                  :src="staticBasePureUrl + collectionList[4].more.thumbnail"
+                  @error="loadErr(4)"
+                  ref="img4"
                   :title="collectionList[4].post_title"
                   class="img-class"
                   @click="toGallery(4)"
@@ -310,7 +323,9 @@
                   :aspect-ratio="16 / 9"
                   lazy-src="../../assets/photo.jpg"
                   height="100%"
-                  :src="staticBaseUrl + collectionList[1].more.thumbnail"
+                  :src="staticBasePureUrl + collectionList[1].more.thumbnail"
+                  @error="loadErr(1)"
+                  ref="img1"
                   :title="collectionList[1].post_title"
                   class="img-class"
                   @click="toGallery(1)"
@@ -345,7 +360,9 @@
                   :aspect-ratio="16 / 9"
                   lazy-src="../../assets/photo.jpg"
                   height="100%"
-                  :src="staticBaseUrl + collectionList[9].more.thumbnail"
+                  :src="staticBasePureUrl + collectionList[9].more.thumbnail"
+                  @error="loadErr(9)"
+                  ref="img9"
                   :title="collectionList[9].post_title"
                   class="img-class"
                   @click="toGallery(9)"
@@ -361,11 +378,11 @@
                       ></v-progress-circular>
                     </v-row>
                   </template>
-                  <div class="hover-class hover-class-s3">
-                    <p class="hover-class-course hover-class-course-s3">
+                  <div class="hover-class hover-class-s1">
+                    <p class="hover-class-course hover-class-course-s1">
                       {{ collectionList[9].course_zh }}
                     </p>
-                    <p class="hover-class-title hover-class-title-s3">
+                    <p class="hover-class-title hover-class-title-s1">
                       {{ collectionList[9].post_title }}
                     </p>
                   </div></v-img
@@ -382,7 +399,9 @@
                   :aspect-ratio="16 / 9"
                   lazy-src="../../assets/photo.jpg"
                   height="100%"
-                  :src="staticBaseUrl + collectionList[2].more.thumbnail"
+                  :src="staticBasePureUrl + collectionList[2].more.thumbnail"
+                  @error="loadErr(2)"
+                  ref="img2"
                   :title="collectionList[2].post_title"
                   class="img-class"
                   @click="toGallery(2)"
@@ -398,11 +417,11 @@
                       ></v-progress-circular>
                     </v-row>
                   </template>
-                  <div class="hover-class hover-class-s3">
-                    <p class="hover-class-course hover-class-course-s3">
+                  <div class="hover-class hover-class-s1">
+                    <p class="hover-class-course hover-class-course-s1">
                       {{ collectionList[2].course_zh }}
                     </p>
-                    <p class="hover-class-title hover-class-title-s3">
+                    <p class="hover-class-title hover-class-title-s1">
                       {{ collectionList[2].post_title }}
                     </p>
                   </div></v-img
@@ -417,7 +436,9 @@
                   :aspect-ratio="16 / 9"
                   lazy-src="../../assets/photo.jpg"
                   height="100%"
-                  :src="staticBaseUrl + collectionList[3].more.thumbnail"
+                  :src="staticBasePureUrl + collectionList[3].more.thumbnail"
+                  @error="loadErr(3)"
+                  ref="img3"
                   :title="collectionList[3].post_title"
                   class="img-class"
                   @click="toGallery(3)"
@@ -566,7 +587,8 @@ export default {
     from: String,
   },
   data: () => ({
-    staticBaseUrl: "http://idesign.tju.edu.cn/upload/",
+    staticBaseUrl: "upload/",
+    staticBasePureUrl: "upload/",
     isTutor: false,
     num: 0,
     loading: true,
@@ -576,14 +598,23 @@ export default {
     tutorSpecial: {},
   }),
   methods: {
+    loadErr(e) {
+      console.log(e);
+      // let tmp = this.$refs["img" + e].src.split("pure/");
+      // if (tmp.length == 2) {
+      //   this.$refs["img" + e].src = tmp.join("");
+      // }
+    },
     toBack() {
-      this.$router.push(this.from.replace("?back=1", "") || "/gallery");
+      this.$router.push(
+        this.from ? this.from.replace("?back=1", "") : "/gallery"
+      );
     },
     toGallery(val) {
       this.$router.push(
         `/gallery/${this.collectionList[val].category_id}/${
           this.collectionList[val].id
-        }?back=1&from=${this.from.replace("?back=1", "")}`
+        }?back=1${this.from ? "&from=" + this.from.replace("?back=1", "") : ""}`
       );
     },
     specialTo() {
@@ -591,7 +622,9 @@ export default {
         this.$router.push(
           `/gallery/${this.tutorSpecial.category_id}/${
             this.tutorSpecial.id
-          }?back=1&from=${this.from.replace("?back=1", "")}`
+          }?back=1${
+            this.from ? "&from=" + this.from.replace("?back=1", "") : ""
+          }`
         );
     },
     getData() {
@@ -625,7 +658,7 @@ export default {
         service("/portal/api_v1/get_design_by_tutor?tutor=" + this.tutor)
           .then(({ data: res }) => {
             this.loading = false;
-            this.tutorSpecial = res.shift();
+            if (res.length) this.tutorSpecial = res.shift();
             this.collectionList = res;
             this.addNum();
             this.noData = res.length === 0 && !this.tutorSpecial.more;
@@ -710,7 +743,7 @@ export default {
 }
 .row1 {
   align-self: flex-end;
-  width: 40%;
+  width: 59%;
 }
 .row2 {
   align-self: flex-end;
@@ -761,11 +794,11 @@ export default {
   padding-left: 4px;
 }
 .col4 {
-  width: 26%;
+  width: 41%;
 }
 .col5 {
   margin-left: 8px;
-  width: 32%;
+  width: 59%;
 }
 .ma4 {
   margin: 4px;
@@ -795,9 +828,9 @@ export default {
 .author-name {
   color: white;
   position: absolute;
-  left: 53%;
+  left: 60%;
   top: 35%;
-  width: 40%;
+  width: 36%;
 }
 .author-name p {
   font-weight: 700;

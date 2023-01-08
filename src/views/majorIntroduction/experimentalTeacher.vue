@@ -48,8 +48,7 @@ export default {
           if (data.data.data[i]) {
             this.teacherList[c].push({
               name: data.data.data[i].name,
-              avatar:
-                "http://idesign.tju.edu.cn/upload/" + data.data.data[i].avatar,
+              avatar: "upload/" + data.data.data[i].avatar,
               desc:
                 data.data.data[i].ttitle +
                 " | " +

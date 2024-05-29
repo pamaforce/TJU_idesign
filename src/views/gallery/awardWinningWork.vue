@@ -67,7 +67,8 @@ export default {
       ).then((data) => {
         let flag = true;
         this.detailList[c] = [];
-        for (let i = 0; i < 12; i++) {
+        let l = data.data.data.length;
+        for (let i = 0; i < l; i++) {
           if (data.data.data[i]) {
             let y = [];
             for (let j = 0; j < data.data.data[i].more.authors.length; j++)

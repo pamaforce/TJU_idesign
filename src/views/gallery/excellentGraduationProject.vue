@@ -106,7 +106,8 @@ export default {
       ).then((data) => {
         let flag = true;
         this.designList[c] = [];
-        for (let i = 0; i < 12; i++) {
+        let l = data.data.data.length;
+        for (let i = 0; i < l; i++) {
           if (data.data.data[i]) {
             this.designList[c].push({
               id: data.data.data[i].id,
